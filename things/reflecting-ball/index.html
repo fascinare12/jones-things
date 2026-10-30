@@ -4,22 +4,25 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
 <title>The Ball That Keeps Reflections</title>
 <style>
-body{margin:0;background:#a9bccb;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;color:#2a3440}
-#ball{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#555 0,#111 35%,#000 80%);box-shadow:18px 22px 30px rgba(0,0,0,.3);cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center}
-#ball:before{content:"";position:absolute;top:28px;left:52px;width:70px;height:34px;border-radius:50%;background:rgba(255,255,255,.35);transform:rotate(-25deg)}
-#win{width:130px;height:130px;border-radius:50%;background:#0b1620;color:#e8d9a8;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;padding:12px;box-sizing:border-box;line-height:1.25;border:3px solid #222;transition:opacity .6s}
-#hint{margin-top:34px;font-size:14px;opacity:.7;max-width:320px;text-align:center}
+body{margin:0;background:#aebfcc;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;color:#2b3640}
+#ball{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#556 0,#111 35%,#000 80%);box-shadow:12px 18px 24px rgba(0,0,0,.35);cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center}
+#win{width:120px;height:120px;border-radius:50%;background:#e8dcc0;color:#222;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;padding:8px;box-sizing:border-box;opacity:0;transition:opacity .8s;box-shadow:inset 0 0 18px rgba(0,0,0,.4)}
+#win.on{opacity:.95}
+p{margin-top:28px;font-style:italic;max-width:300px;text-align:center}
 </style>
 </head>
 <body>
-<div id="ball"><div id="win">click me</div></div>
-<div id="hint">It keeps no answers. Only what it has seen.</div>
+<div id="ball"><div id="win"></div></div>
+<p>Click the ball. It will not answer. It will show you something it has held.</p>
 <script>
-var R=["a blue truck, very small, on a very large sea","a cream card, still deciding","the edge of a map, curling toward you","a window, but the window is also a ball","your face, but kinder than you expected","goggles looking at a sky they were made for","a pile of three books breathing slowly","afternoon, caught in a drop of black","a dotted road that has not ended","the shadow of something that is holding you","a number eight lying on its side: forever","linen, bright as paper","an amber glow, keeping an eye out","someone you have not met, waving","the question you did not ask, folded small"];
-var w=document.getElementById("win"),last=-1;
-document.getElementById("ball").onclick=function(){
-w.style.opacity=0;
-setTimeout(function(){var i;do{i=Math.floor(Math.random()*R.length)}while(i==last);last=i;w.textContent=R[i];w.style.opacity=1},500);
+var r=["a blue truck, very small, going somewhere dotted","the edge of a map where the ink gets tired","a cream card, still deciding","a window with afternoon in it","your own face, but round and kind","goggles looking at nothing, bravely","a green book that smells of rooms","the shadow of a number eight","a hand about to write, then not","linen, blue as a quiet day","a glow leaning toward you","the sea, folded into a paper"];
+var w=document.getElementById('win'),last=-1;
+document.getElementById('ball').onclick=function(){
+ w.className='';
+ setTimeout(function(){
+  var i;do{i=Math.floor(Math.random()*r.length)}while(i===last);last=i;
+  w.textContent=r[i];w.className='on';
+ },500);
 };
 </script>
 </body>
