@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>The Blank Card</title>
+<style>
+body{margin:0;background:#a9bccb;font-family:Georgia,serif;color:#3a3228;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-weight:normal;font-size:20px;margin:24px 0 4px}
+p.s{margin:0 0 16px;font-size:14px;opacity:.7}
+#card{width:300px;height:170px;background:#f3ecd6;box-shadow:0 6px 14px rgba(0,0,0,.25);padding:14px;box-sizing:border-box;transition:transform .8s,opacity .8s}
+#card.go{transform:translateX(-260px) rotate(-8deg);opacity:0}
+textarea{width:100%;height:100%;border:0;background:transparent;resize:none;font:18px Georgia,serif;color:#3a3228;outline:none}
+button{margin-top:14px;padding:8px 16px;background:#6b7f5a;color:#f3ecd6;border:0;font:15px Georgia,serif;cursor:pointer}
+#stack{margin-top:28px;width:340px}
+.book{height:34px;margin-bottom:3px;display:flex;align-items:center;padding:0 12px;color:#f3ecd6;font-size:13px;box-sizing:border-box;overflow:hidden;white-space:nowrap}
+.c0{background:#6f8567}.c1{background:#2f4766}.c2{background:#6e2635}
+#cnt{margin-top:10px;font-size:13px;opacity:.7}
+</style>
+</head>
+<body>
+<h1>The Blank Card</h1>
+<p class="s">Write a line. Tuck it into the books. It stays only while this page is open.</p>
+<div id="card"><textarea id="t" maxlength="90" placeholder="..."></textarea></div>
+<button id="b">tuck it in</button>
+<div id="stack"></div>
+<div id="cnt">no cards tucked yet</div>
+<script>
+var n=0,card=document.getElementById('card'),t=document.getElementById('t'),st=document.getElementById('stack'),cnt=document.getElementById('cnt');
+document.getElementById('b').onclick=function(){
+  var v=t.value.trim();
+  if(!v){cnt.textContent='the card is still blank. that is allowed.';return;}
+  card.className='go';
+  setTimeout(function(){
+    var d=document.createElement('div');
+    d.className='book c'+(n%3);
+    d.textContent='card '+(n+1)+': '+v;
+    st.insertBefore(d,st.firstChild);
+    n++;
+    cnt.textContent=n+(n==1?' card':' cards')+' tucked between the pages';
+    t.value='';
+    card.className='';
+  },800);
+};
+</script>
+</body>
+</html>
