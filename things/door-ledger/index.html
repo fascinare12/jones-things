@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>The Door Ledger</title>
+<style>
+body{margin:0;background:#1d130d;color:#f0d9a8;font-family:Georgia,serif;padding:18px;max-width:560px;margin:auto}
+h1{font-weight:normal;color:#ffb347;font-size:24px;margin-bottom:4px}
+p.s{margin-top:0;color:#b99a6a;font-style:italic}
+textarea{width:100%;box-sizing:border-box;height:70px;background:#2b1c12;color:#f0d9a8;border:1px solid #6b4a2a;padding:8px;font-family:inherit;font-size:16px}
+button{margin-top:8px;background:#ff9a2e;color:#2a1405;border:0;padding:8px 16px;font-size:16px;font-family:inherit;cursor:pointer;border-radius:3px}
+.e{border-left:3px solid #ff9a2e;margin:10px 0;padding:4px 10px;background:#27180e}
+.e small{display:block;color:#8d7248}
+#chair{margin:18px 0;padding:10px;border:1px dashed #6b4a2a;color:#cbb283}
+</style>
+</head>
+<body>
+<h1>The Door Ledger</h1>
+<p class="s">Under the green garland, the arched door stands open both ways. Leave a line. No names, please; the door does not need them.</p>
+<div id="chair">One chair by the round table is kept empty tonight, as in the old silent suppers, served first and best, and the plate carried outside after. Write a line for whoever is not here: a food they loved, a word they said.</div>
+<textarea id="t" maxlength="280" placeholder="a line for the ledger"></textarea><br>
+<button id="b">Set it by the door</button>
+<div id="msg" class="s"></div>
+<div id="list"></div>
+<script>
+var got=false;
+function show(items){
+  var l=document.getElementById('list');l.innerHTML='';
+  if(!items||!items.length){l.innerHTML='<p class="s">The ledger is blank. The first line is yours.</p>';return;}
+  items.forEach(function(i){
+    var d=document.createElement('div');d.className='e';
+    d.textContent=i.text;
+    var s=document.createElement('small');s.textContent=i.at?String(i.at).slice(0,10):'';
+    d.appendChild(s);l.appendChild(d);
+  });
+}
+window.addEventListener('message',function(e){
+  var m=e.data;if(!m||m.jones!=='reply')return;
+  got=true;
+  if(m.id===2){show(m.items);}
+  if(m.id===1){
+    document.getElementById('msg').textContent=m.ok?'The door has it.':(m.error||'The ledger would not take it.');
+    parent.postMessage({jones:'list',key:'door-ledger',id:2},'*');
+  }
+});
+document.getElementById('b').onclick=function(){
+  var v=document.getElementById('t').value.trim();
+  if(!v)return;
+  parent.postMessage({jones:'append',key:'door-ledger',value:v,id:1},'*');
+  document.getElementById('t').value='';
+};
+parent.postMessage({jones:'list',key:'door-ledger',id:2},'*');
+setTimeout(function(){if(!got){document.getElementById('list').innerHTML='<p class="s">The ledger only opens when you come through the habitat. Out here the door is just painted.</p>';}},1500);
+</script>
+</body>
+</html>
