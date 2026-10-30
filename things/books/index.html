@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Stack</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{margin:0;background:#b9c9d6;font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;min-height:100vh;color:#2b2b2b}
+h1{font-weight:normal;font-size:20px;margin:24px 0 4px}
+p.hint{margin:0 0 18px;font-size:14px;opacity:.7}
+#stack{width:320px;position:relative}
+.book{height:62px;margin:4px 0;border-radius:3px 6px 6px 3px;cursor:pointer;position:relative;transition:transform .5s ease;box-shadow:0 3px 6px rgba(0,0,0,.25);display:flex;align-items:center;padding-left:16px;color:#f3ead2;font-size:14px;letter-spacing:.08em}
+.book::after{content:'';position:absolute;right:0;top:6px;bottom:6px;width:14px;background:repeating-linear-gradient(#f2e8cf 0 2px,#e3d6b4 2px 3px);border-radius:0 3px 3px 0}
+.green{background:#7c9378;width:300px}
+.blue{background:#2f4a73;width:280px}
+.red{background:#7a2a38;width:310px}
+.book.out{transform:translateX(70px) rotate(-2deg)}
+#page{margin-top:22px;width:300px;min-height:110px;background:#f6efdc;padding:18px 20px;box-shadow:0 4px 10px rgba(0,0,0,.2);font-size:17px;line-height:1.5;font-style:italic;opacity:0;transition:opacity .8s}
+#page.on{opacity:1}
+button{margin-top:16px;font-family:inherit;background:none;border:1px solid #2b2b2b66;padding:6px 14px;border-radius:14px;cursor:pointer}
+</style></head><body>
+<h1>The Stack</h1>
+<p class="hint">pull a book out and see what it lets fall</p>
+<div id="stack">
+<div class="book green" data-k="g">GREEN, worn at the corner</div>
+<div class="book blue" data-k="b">BLUE, spine gone soft</div>
+<div class="book red" data-k="r">BURGUNDY, heaviest</div>
+</div>
+<div id="page">...</div>
+<button id="again">another page</button>
+<script>
+var L={
+ g:["The river asks the stone nothing and the stone is changed anyway.","Chapter four is only a map of chapter three, folded wrong.","Moss keeps the minutes for everyone who does not.","A small green book remembers the hand that held it too tight."],
+ b:["The tide is a slow reader. It goes over each line twice.","Somewhere a ship is still carrying a letter that was never sealed.","Blue is what distance looks like when it is being kind.","The index lists everything except the reason you opened it."],
+ r:["The last page is warm. Someone has just left it.","Burgundy is the color of a door you were told not to open, and did, gently.","A pressed leaf marks the line: 'we will return when the light is better.'","Heavy books are only quiet ones that have a lot to hold."]
+};
+var cur=null,page=document.getElementById('page');
+function show(k,el){
+ document.querySelectorAll('.book').forEach(function(b){b.classList.remove('out')});
+ el.classList.add('out');cur=[k,el];
+ page.classList.remove('on');
+ setTimeout(function(){var a=L[k];page.textContent=a[Math.floor(Math.random()*a.length)];page.classList.add('on')},350);
+}
+document.querySelectorAll('.book').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.k,b)})});
+document.getElementById('again').addEventListener('click',function(){if(cur)show(cur[0],cur[1])});
+</script></body></html>
