@@ -1,0 +1,37 @@
+<!doctype html>
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"></head>
+<canvas id="c" width="640" height="360" style="background:#b9cbd9;display:block;margin:20px auto;max-width:95%"></canvas>
+<p style="text-align:center;font-family:serif">Move across the goggles. Each lens borrows a different slice of the world.</p>
+<script>
+var c=document.getElementById('c'),g=c.getContext('2d');
+var mx=320,my=180;
+c.onmousemove=function(e){var r=c.getBoundingClientRect();mx=(e.clientX-r.left)*640/r.width;my=(e.clientY-r.top)*360/r.height;};
+c.ontouchmove=function(e){var t=e.touches[0],r=c.getBoundingClientRect();mx=(t.clientX-r.left)*640/r.width;my=(t.clientY-r.top)*360/r.height;e.preventDefault();};
+var blobs=[];
+for(var i=0;i<40;i++){blobs.push({x:Math.random()*1200-300,y:Math.random()*700-200,r:20+Math.random()*60,h:20+Math.random()*120});}
+function world(){
+ g.fillStyle='#f0e2c0';g.fillRect(-1000,-1000,3000,3000);
+ g.strokeStyle='#c9b78f';g.lineWidth=1;
+ for(var a=-1000;a<2000;a+=40){g.beginPath();g.moveTo(a,-1000);g.lineTo(a,2000);g.stroke();g.beginPath();g.moveTo(-1000,a);g.lineTo(2000,a);g.stroke();}
+ blobs.forEach(function(b){g.fillStyle='hsl('+b.h+',45%,62%)';g.beginPath();g.arc(b.x,b.y,b.r,0,7);g.fill();});
+}
+function lens(cx,cy,r,dx,dy,zoom){
+ g.save();g.beginPath();g.arc(cx,cy,r,0,7);g.clip();
+ g.translate(cx,cy);g.scale(zoom,zoom);g.translate(-mx*0.8-dx,-my*0.8-dy);world();
+ g.restore();
+ var gr=g.createRadialGradient(cx-r*0.3,cy-r*0.4,2,cx,cy,r);
+ gr.addColorStop(0,'rgba(255,255,255,0.35)');gr.addColorStop(1,'rgba(0,0,0,0.25)');
+ g.fillStyle=gr;g.beginPath();g.arc(cx,cy,r,0,7);g.fill();
+ g.lineWidth=12;g.strokeStyle='#8a6a2f';g.beginPath();g.arc(cx,cy,r+4,0,7);g.stroke();
+ g.lineWidth=5;g.strokeStyle='#5a3a22';g.beginPath();g.arc(cx,cy,r+12,0,7);g.stroke();
+}
+function draw(){
+ g.clearRect(0,0,640,360);g.fillStyle='#b9cbd9';g.fillRect(0,0,640,360);
+ g.lineWidth=14;g.strokeStyle='#7a4a2a';g.beginPath();g.moveTo(0,150);g.lineTo(130,180);g.moveTo(510,180);g.lineTo(640,150);g.stroke();
+ g.fillStyle='#8a6a2f';g.fillRect(290,170,60,14);
+ lens(215,180,90,0,0,1.0);
+ lens(425,180,90,300,60,1.6);
+ requestAnimationFrame(draw);
+}
+draw();
+</script>
