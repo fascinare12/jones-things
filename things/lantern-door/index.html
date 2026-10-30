@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>Lantern Door</title>
+<style>
+body{margin:0;background:#150f0c;color:#e8c9a0;font-family:Georgia,serif;text-align:center}
+canvas{display:block;margin:0 auto;max-width:100%;cursor:pointer}
+p{margin:6px;font-size:14px}
+</style>
+</head>
+<body>
+<canvas id="c" width="640" height="360"></canvas>
+<p id="t">Click a lantern to light it. Click it again to turn it into a turnip.</p>
+<script>
+var c=document.getElementById('c'),g=c.getContext('2d'),t=document.getElementById('t');
+var L=[];for(var i=0;i<5;i++)L.push({x:90+i*115,y:230,s:0,r:34+(i%2)*8});
+// s: 0 dark pumpkin, 1 lit pumpkin, 2 lit turnip
+var wander=-60,phase=0;
+c.onclick=function(e){var b=c.getBoundingClientRect(),mx=(e.clientX-b.left)*640/b.width,my=(e.clientY-b.top)*360/b.height;
+L.forEach(function(l){if(Math.hypot(mx-l.x,my-l.y)<l.r+8)l.s=(l.s+1)%3});
+var lit=L.filter(function(l){return l.s>0}).length,tn=L.filter(function(l){return l.s==2}).length;
+t.textContent=lit==5?(tn>=3?"Jack walks by with his coal, and finds the old roots kind.":"Jack hurries past the door. Too many pumpkins; he does not know them."):"Lit: "+lit+" of 5";};
+function face(l,lit){g.fillStyle=lit?'#ffd36a':'#2a1a10';var r=l.r;
+g.beginPath();g.moveTo(l.x-r*.4,l.y-r*.1);g.lineTo(l.x-r*.1,l.y-r*.1);g.lineTo(l.x-r*.25,l.y-r*.4);g.fill();
+g.beginPath();g.moveTo(l.x+r*.4,l.y-r*.1);g.lineTo(l.x+r*.1,l.y-r*.1);g.lineTo(l.x+r*.25,l.y-r*.4);g.fill();
+g.beginPath();g.arc(l.x,l.y+r*.25,r*.4,0,Math.PI);g.fill();}
+function draw(){phase+=.1;g.fillStyle='#150f0c';g.fillRect(0,0,640,360);
+g.fillStyle='#2b1d14';g.fillRect(0,290,640,70);
+g.fillStyle='#3a2a1c';g.fillRect(40,80,560,16);
+var all=L.every(function(l){return l.s>0});
+if(all){wander+=1.6;if(wander>700)wander=-60;
+ var wy=300;g.fillStyle='#000';g.beginPath();g.ellipse(wander,wy-30,14,30,0,0,7);g.fill();
+ g.fillStyle='#ff8a2a';g.beginPath();g.arc(wander+20,wy-20,4+Math.sin(phase)*1.2,0,7);g.fill();}
+L.forEach(function(l,i){var fl=l.s>0?Math.sin(phase*1.7+i)*3:0;
+ if(l.s>0){var gr=g.createRadialGradient(l.x,l.y,5,l.x,l.y,110+fl*4);gr.addColorStop(0,'rgba(255,170,60,.55)');gr.addColorStop(1,'rgba(255,170,60,0)');g.fillStyle=gr;g.fillRect(l.x-130,l.y-130,260,260);}
+ g.fillStyle=l.s==2?'#d9cfe0':'#d9731c';
+ g.beginPath();g.ellipse(l.x,l.y,l.r*(l.s==2?.9:1.15),l.r,0,0,7);g.fill();
+ if(l.s==2){g.fillStyle='#8a4a8a';g.beginPath();g.ellipse(l.x,l.y-l.r*.7,l.r*.8,l.r*.3,0,0,7);g.fill();}
+ g.fillStyle='#4a6a2a';g.fillRect(l.x-3,l.y-l.r-8,6,10);
+ face(l,l.s>0);});
+requestAnimationFrame(draw);}
+draw();
+</script>
+</body>
+</html>
