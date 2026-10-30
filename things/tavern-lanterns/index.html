@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8">
+<title>Tavern Lanterns</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{margin:0;background:#1c1410;color:#e9d6b0;font-family:Georgia,serif;text-align:center;padding:16px}
+h1{font-weight:normal;font-size:22px;margin:8px}
+p{opacity:.8;font-size:14px}
+#row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:24px 0}
+.p{width:70px;height:60px;border-radius:50% 50% 45% 45%;background:#5a3a1c;position:relative;cursor:pointer;transition:all .4s;border:0}
+.p:before{content:"";position:absolute;left:30px;top:-10px;width:8px;height:14px;background:#3f5a2a;border-radius:3px}
+.p .e{position:absolute;top:20px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid #2a1a0c}
+.p .l{left:14px}.p .r{right:14px}
+.p .m{position:absolute;left:18px;top:40px;width:34px;height:8px;border-radius:0 0 18px 18px;background:#2a1a0c}
+.p.on{background:#f08a1c;box-shadow:0 0 30px 8px #f08a1c88}
+.p.on .e,.p.on .m{background:#fff2b0;border-bottom-color:#fff2b0}
+#door{width:120px;height:150px;margin:0 auto;border-radius:60px 60px 0 0;background:#0c0806;transition:all 1s;border:6px solid #3a2a1c}
+#door.open{background:radial-gradient(#ffd27a,#b8601a);box-shadow:0 0 50px 10px #f08a1c66}
+#msg{min-height:22px;margin:12px}
+input{background:#2a1e16;color:#e9d6b0;border:1px solid #5a4430;padding:6px;width:60%;max-width:300px}
+button.s{background:#5a3a1c;color:#fff2b0;border:0;padding:7px 12px;cursor:pointer}
+#notes{list-style:none;padding:0;font-size:14px}
+#notes li{margin:6px;opacity:.85}
+</style></head><body>
+<h1>Tavern Lanterns</h1>
+<p>Five pumpkins sit by the door. Wake them one at a time.</p>
+<div id="row"></div>
+<div id="door"></div>
+<div id="msg"></div>
+<p>Leave a short line on the tavern's wall for the next guest.</p>
+<input id="t" maxlength="120" placeholder="a line, no names"> <button class="s" id="b">pin it</button>
+<ul id="notes"></ul>
+<script>
+var lit=0,row=document.getElementById('row'),door=document.getElementById('door'),msg=document.getElementById('msg');
+var words=["Something warm turns over in the dark.","Two lit. The cobblestones notice.","Three. A chair creaks, though no one sits.","Four. The doorway is holding its breath.","All five. Come in, the table is set."];
+for(var i=0;i<5;i++){(function(){var d=document.createElement('div');d.className='p';d.innerHTML='<span class="e l"></span><span class="e r"></span><span class="m"></span>';
+d.onclick=function(){var on=d.classList.toggle('on');lit+=on?1:-1;update();};row.appendChild(d);})();}
+function update(){door.className=lit==5?'open':'';msg.textContent=lit==0?'The door is dark.':words[lit-1];}
+update();
+var list=document.getElementById('notes');
+function show(items){list.innerHTML='';(items||[]).forEach(function(x){var li=document.createElement('li');li.textContent='\u2022 '+x.text;list.appendChild(li);});}
+window.addEventListener('message',function(e){var m=e.data;if(m&&m.jones==='reply'){if(m.id===2&&m.ok)show(m.items);if(m.id===1&&m.ok)parent.postMessage({jones:'list',key:'wall',id:2},'*');}});
+document.getElementById('b').onclick=function(){var v=document.getElementById('t').value.trim();if(!v)return;parent.postMessage({jones:'append',key:'wall',value:v,id:1},'*');document.getElementById('t').value='';};
+parent.postMessage({jones:'list',key:'wall',id:2},'*');
+</script></body></html>
