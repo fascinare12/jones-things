@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>Soul Cakes</title>
+<style>
+body{margin:0;background:#1d130d;color:#f0d9a8;font-family:Georgia,serif;padding:18px;max-width:560px;margin:auto}
+h1{font-weight:normal;color:#ffb347;font-size:24px;margin-bottom:4px}
+.s{color:#b99a6a;font-style:italic}
+#plate{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;padding:14px;background:#2b1c12;border-radius:50%/30%;min-height:90px}
+.c{width:64px;height:64px;border-radius:50%;background:#c98a3c;border:3px solid #e8b565;position:relative;cursor:pointer;box-shadow:0 3px 0 #6b4a2a}
+.c:before,.c:after{content:"";position:absolute;background:#7a4a1c}
+.c:before{left:28px;top:12px;width:4px;height:36px}
+.c:after{left:12px;top:28px;width:36px;height:4px}
+.c i{position:absolute;width:6px;height:6px;border-radius:50%;background:#4a1d2a;z-index:2}
+.c.on{outline:3px solid #ff9a2e}
+.gone{opacity:.15;cursor:default}
+input{width:100%;box-sizing:border-box;background:#2b1c12;color:#f0d9a8;border:1px solid #6b4a2a;padding:8px;font-family:inherit;font-size:16px}
+button{margin-top:8px;background:#ff9a2e;color:#2a1405;border:0;padding:8px 16px;font-size:16px;font-family:inherit;cursor:pointer;border-radius:3px}
+#out{margin:14px 0;min-height:40px}
+.e{border-left:3px solid #ff9a2e;margin:8px 0;padding:4px 10px;background:#27180e}
+</style>
+</head>
+<body>
+<h1>Soul Cakes</h1>
+<p class="s">Small round spiced cakes, a cross cut in each, currants pressed along it. In the old souling, a cake was given for a prayer, and each cake eaten stood for one soul. Take a cake. Say who it is for.</p>
+<div id="plate"></div>
+<div id="form" style="display:none">
+<input id="t" maxlength="200" placeholder="one prayer, no names, for whoever needs it">
+<button id="b">Eat the cake</button>
+</div>
+<div id="out" class="s">Choose a cake from the plate.</div>
+<h3 style="font-weight:normal;color:#ffb347">Prayers already said at this table</h3>
+<div id="list"><p class="s">No prayers yet.</p></div>
+<script>
+var N=7,sel=-1,eaten=0;
+var plate=document.getElementById('plate');
+function build(){
+  plate.innerHTML='';
+  for(var k=0;k<N;k++){
+    (function(k){
+      var d=document.createElement('div');d.className='c'+(k<eaten?' gone':'');
+      for(var j=0;j<4;j++){var r=document.createElement('i');r.style.left=(10+((k*13+j*17)%36))+'px';r.style.top=(10+((k*7+j*23)%36))+'px';d.appendChild(r);}
+      d.onclick=function(){if(k<eaten)return;sel=k;document.getElementById('form').style.display='block';
+        var all=plate.children;for(var q=0;q<all.length;q++)all[q].className='c'+(q<eaten?' gone':'')+(q===k?' on':'');
+        document.getElementById('out').textContent='This one is warm. Who is it for?';};
+      plate.appendChild(d);
+    })(k);
+  }
+}
+function show(items){
+  var l=document.getElementById('list');l.innerHTML='';
+  if(!items||!items.length){l.innerHTML='<p class="s">No prayers yet.</p>';return;}
+  items.forEach(function(i){var d=document.createElement('div');d.className='e';d.textContent=i.text;l.appendChild(d);});
+}
+window.addEventListener('message',function(e){
+  var m=e.data;if(!m||m.jones!=='reply')return;
+  if(m.id===2)show(m.items);
+  if(m.id===1){parent.postMessage({jones:'list',key:'soul-cakes',id:2},'*');}
+});
+document.getElementById('b').onclick=function(){
+  var v=document.getElementById('t').value.trim();
+  if(!v||sel<0)return;
+  parent.postMessage({jones:'append',key:'soul-cakes',value:v,id:1},'*');
+  eaten=eaten+1;
+  document.getElementById('t').value='';
+  document.getElementById('form').style.display='none';
+  document.getElementById('out').textContent=eaten>=N?'The plate is bare. One soul freed for every cake; the rest is carried outside.':'Eaten. Somewhere a soul is a little lighter. '+(N-eaten)+' left.';
+  sel=-1;build();
+};
+build();
+parent.postMessage({jones:'list',key:'soul-cakes',id:2},'*');
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Soul Cakes](https://fascinare12.github.io/jones-things/things/soul-cakes/index.html) | A plate of seven soul cakes: pick one, say a prayer (no names), eat it; prayers are kept in a shared list. | Oct 30, 2026 |
 | [The Door Ledger](https://fascinare12.github.io/jones-things/things/door-ledger/index.html) | A guestbook at the tavern's arched door, with an empty chair kept for whoever is not here. | Oct 30, 2026 |
 | [Tavern Chalkboard](https://fascinare12.github.io/jones-things/things/tavern-menu/index.html) | A chalkboard menu for the tavern that changes with the hour, with a slider and a brack that hides a charm. | Oct 30, 2026 |
 | [The Tavern Clock](https://fascinare12.github.io/jones-things/things/tavern-clock/index.html) | A tavern clock that names each hour oddly instead of numbering it, and can be pushed an hour forward or back. | Oct 30, 2026 |
