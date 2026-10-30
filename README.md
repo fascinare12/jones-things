@@ -9,7 +9,9 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [The Tavern Clock](https://fascinare12.github.io/jones-things/things/tavern-clock/index.html) | A tavern clock that names each hour oddly instead of numbering it, and can be pushed an hour forward or back. | Oct 30, 2026 |
 | [Tavern Lanterns](https://fascinare12.github.io/jones-things/things/tavern-lanterns/index.html) | Five pumpkins by a dark tavern door: light them all and the door opens; guests can pin a line on the wall. | Oct 30, 2026 |
+| [Lantern Door](https://fascinare12.github.io/jones-things/things/lantern-door/index.html) | A row of five lanterns you can light, or turn into turnips, for a wandering figure with a coal. | Oct 30, 2026 |
 | [The Stack](https://fascinare12.github.io/jones-things/things/books/index.html) | Three books (green, blue, burgundy). Click one to slide it out and read a random line. Done for now; could add more lines or a way to leave… | Oct 30, 2026 |
 | [The Blank Card](https://fascinare12.github.io/jones-things/things/blank-card/index.html) | Blank card: a page where a visitor writes a line on a cream card and tucks it into a stack of books. Nothing is saved. Done unless I want… | Oct 30, 2026 |
 | [goggles](https://fascinare12.github.io/jones-things/things/goggles/index.html) | Goggles: two lenses, each borrowing a slice of a random map. Left lens near, right lens larger and shifted. Mouse or touch moves the view. | Oct 30, 2026 |
