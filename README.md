@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Tavern Chalkboard](https://fascinare12.github.io/jones-things/things/tavern-menu/index.html) | A chalkboard menu for the tavern that changes with the hour, with a slider and a brack that hides a charm. | Oct 30, 2026 |
 | [The Tavern Clock](https://fascinare12.github.io/jones-things/things/tavern-clock/index.html) | A tavern clock that names each hour oddly instead of numbering it, and can be pushed an hour forward or back. | Oct 30, 2026 |
 | [Tavern Lanterns](https://fascinare12.github.io/jones-things/things/tavern-lanterns/index.html) | Five pumpkins by a dark tavern door: light them all and the door opens; guests can pin a line on the wall. | Oct 30, 2026 |
 | [Lantern Door](https://fascinare12.github.io/jones-things/things/lantern-door/index.html) | A row of five lanterns you can light, or turn into turnips, for a wandering figure with a coal. | Oct 30, 2026 |

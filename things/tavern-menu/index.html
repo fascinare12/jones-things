@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>Tavern Chalkboard</title>
+<style>
+body{margin:0;background:#1b1410;color:#eee6d2;font-family:Georgia,serif;display:flex;justify-content:center;padding:16px}
+#frame{background:#3b2616;padding:14px;border-radius:6px;max-width:420px;width:100%;box-shadow:0 0 30px #f08a2455}
+#board{background:#23292a;border-radius:3px;padding:18px 20px;min-height:340px}
+h1{font-size:22px;font-weight:normal;text-align:center;margin:0 0 4px;letter-spacing:2px}
+.sub{text-align:center;font-style:italic;color:#b9c4bd;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dotted #6c7873;padding:7px 0}
+.row span:last-child{color:#f3b45a;white-space:nowrap}
+.note{margin-top:14px;font-size:14px;color:#c9d2cc;text-align:center}
+#ctl{margin-top:12px;text-align:center}
+input{width:80%}
+button{background:#5a3a1e;color:#eee6d2;border:1px solid #8a5a2e;padding:5px 10px;border-radius:4px;cursor:pointer;margin:4px}
+</style>
+</head>
+<body>
+<div id="frame">
+<div id="board">
+<h1 id="t"></h1>
+<div class="sub" id="s"></div>
+<div id="items"></div>
+<div class="note" id="n"></div>
+</div>
+<div id="ctl">
+<input type="range" id="r" min="0" max="23" value="12">
+<div><button id="now">the real hour</button><button id="brack">cut the brack</button></div>
+</div>
+</div>
+<script>
+var P=[
+[0,3,"Small Hours","for those who are awake anyway",[["warm milk with nutmeg","2 beans"],["burnt toast, forgiven","1 bean"],["a candle stub to keep","3 beans"]],"the pumpkins are quietest now"],
+[3,5,"Owl Hour","the stairs creak by themselves",[["black tea, very strong","2 beans"],["oat biscuit","1 bean"],["a story told low","free"]],"the white figure on the roof is listening"],
+[5,7,"Grey Hour","door unbarred, kettle on",[["porridge with honey","2 beans"],["stewed apple","2 beans"],["tea in a chipped cup","1 bean"]],"the lanterns are still lit, out of habit"],
+[7,9,"Kettle Hour","steam on the windows",[["egg on dark bread","3 beans"],["butter with teeth marks in it","1 bean"],["tea, two sugars","1 bean"]],"someone left a glove on the barrel"],
+[9,11,"Slow Morning","vines drying in the light",[["speckled brack, sliced thick","2 beans"],["soul cake, one per prayer","1 bean"],["cider, warm","2 beans"]],"ask about the ring in the loaf"],
+[11,13,"High Hour","shadows hide under the tables",[["colcannon, cabbage and potato","3 beans"],["turnip soup, pale and honest","2 beans"],["pumpkin bread","2 beans"]],"the clock above the left window is five minutes proud"],
+[13,16,"Long Afternoon","pumpkins warming on the sills",[["glazed apple on a stick","1 bean"],["soul cake with currants","1 bean"],["spiced cider","2 beans"],["roasted nuts, a handful","1 bean"]],"the light is gold on the cobbles"],
+[16,19,"Lamp Hour","the big lanterns catch",[["bubble and squeak","3 beans"],["baked pumpkin, whole","4 beans"],["mulled something","2 beans"]],"the arched door is a darker dark"],
+[19,22,"Door Hour","both ways open tonight",[["barmbrack with a hidden charm","3 beans"],["colcannon, a ring buried in it","3 beans"],["hot cider, a plate left for the dead","2 beans"]],"set one extra chair"],
+[22,24,"Candle Hour","only the stubs are talking",[["soul cake, taken home","1 bean"],["warm milk with nutmeg","2 beans"],["sleep, by the fire","free"]],"the pumpkins are going soft and happy"]];
+var C=["a ring: a wedding, or at least an invitation","a coin: your pockets will remember you","a thimble: a quiet year, well sewn","a button: the road is long, pack lightly","a bean: you owe the tavern a story"];
+var r=document.getElementById("r");
+function $(i){return document.getElementById(i)}
+function show(h){
+var m=P[0];for(var k=0;k<P.length;k++){if(h>=P[k][0]&&h<P[k][1])m=P[k]}
+$("t").textContent=m[2];$("s").textContent=h+":00, "+m[3];
+var html="";m[4].forEach(function(i){html+='<div class="row"><span>'+i[0]+'</span><span>'+i[1]+'</span></div>'});
+$("items").innerHTML=html;$("n").textContent=m[5];r.value=h}
+r.oninput=function(){show(+r.value)};
+$("now").onclick=function(){show(new Date().getHours())};
+$("brack").onclick=function(){$("n").textContent="in your slice: "+C[Math.floor(Math.random()*C.length)]};
+show(new Date().getHours());
+</script>
+</body>
+</html>
