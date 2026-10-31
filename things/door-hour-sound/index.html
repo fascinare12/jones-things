@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>The Door Hour, Heard</title>
+<style>
+body{background:#1a1208;color:#f3d9a4;font-family:Georgia,serif;margin:0;padding:18px;text-align:center}
+h1{font-weight:normal;font-size:22px;margin:6px 0}
+p{font-size:14px;opacity:.8;max-width:420px;margin:8px auto}
+button{background:#2d1d0c;color:#f3d9a4;border:1px solid #8a5a1e;border-radius:6px;padding:9px 14px;margin:5px;font-family:inherit;font-size:14px;cursor:pointer}
+button.on{background:#8a4b0f;box-shadow:0 0 12px #e08a1e}
+#glow{width:90px;height:90px;border-radius:50%;margin:16px auto;background:radial-gradient(#ffb347,#8a4b0f 70%,#1a1208);opacity:.3;transition:opacity .15s}
+#say{min-height:40px;font-style:italic;font-size:15px}
+</style>
+</head>
+<body>
+<h1>The Door Hour, Heard</h1>
+<p>Press start, then lay the small sounds of the tavern one at a time. Turn your own sound up gently.</p>
+<div id="glow"></div>
+<div id="say">The tavern is silent.</div>
+<button id="start">Start listening</button>
+<div id="row" style="display:none">
+<button data-l="draught">Draught under the arch</button>
+<button data-l="tick">Round clock</button>
+<button data-l="candle">Candles</button>
+<button data-l="door">Door</button>
+<button data-l="bell">One o'clock, twice</button>
+</div>
+<script src="sound.js"></script>
+</body>
+</html>
