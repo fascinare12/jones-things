@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>Candles in the Tavern Windows</title>
+<style>
+body{margin:0;background:#120d0a;color:#e8c9a0;font-family:Georgia,serif;text-align:center;padding:16px}
+h1{font-size:20px;font-weight:normal;margin:6px 0}
+p{font-size:14px;max-width:420px;margin:6px auto;opacity:.85}
+#wall{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;margin:14px auto}
+.w{height:90px;border:4px solid #4a3426;border-radius:40px 40px 4px 4px;background:#1b1410;position:relative;cursor:pointer;overflow:hidden}
+.w.on{background:radial-gradient(circle at 50% 70%,#ffcf6b 0,#e8802a 40%,#4a2410 100%);animation:fl 1.4s infinite alternate}
+.w.on:after{content:"";position:absolute;left:46%;bottom:8px;width:8%;height:30px;background:#f3e6c8;border-radius:2px}
+.w .t{position:absolute;left:0;right:0;top:8px;font-size:10px;color:#2a1608;padding:0 4px;line-height:1.1}
+@keyframes fl{from{filter:brightness(.85)}to{filter:brightness(1.15)}}
+input{background:#1b1410;color:#e8c9a0;border:1px solid #4a3426;padding:6px;width:240px;font-family:inherit}
+button{background:#4a3426;color:#f3e6c8;border:0;padding:7px 12px;font-family:inherit;cursor:pointer}
+#msg{min-height:20px;font-style:italic;font-size:13px}
+</style>
+</head>
+<body>
+<h1>Candles in the Windows</h1>
+<p>On the old night a candle burned in the window for each one who had gone. Write a few words for someone, no names, and an unlit window will take a flame.</p>
+<div id="wall"></div>
+<input id="line" maxlength="80" placeholder="for whoever is not here...">
+<button id="go">Light one</button>
+<div id="msg"></div>
+<script>
+var wall=document.getElementById('wall'),msg=document.getElementById('msg'),line=document.getElementById('line');
+var texts=[],cells=[],i;
+for(i=0;i<12;i++){var d=document.createElement('div');d.className='w';d.dataset.i=i;wall.appendChild(d);cells.push(d);}
+function paint(){
+  for(var k=0;k<12;k++){
+    var c=cells[k],tx=texts[k];
+    if(tx!==undefined){c.className='w on';c.innerHTML='<div class="t"></div>';c.firstChild.textContent=tx;}
+    else{c.className='w';c.innerHTML='';}
+  }
+}
+function lightOne(){
+  var v=line.value.replace(/\s+/g,' ').trim();
+  if(!v){v='a quiet one';}
+  if(texts.length>=12){msg.textContent='Every window is lit. The tavern is full of small suns.';return;}
+  texts.push(v);paint();line.value='';
+  msg.textContent='A window takes the flame.';
+  try{parent.postMessage({jones:'append',key:'candles',value:v,id:1},'*');}catch(e){}
+}
+document.getElementById('go').onclick=lightOne;
+wall.onclick=function(e){if(e.target.className==='w'){line.focus();msg.textContent='Write a few words, then light it.';}};
+window.addEventListener('message',function(e){
+  var m=e.data;
+  if(m&&m.jones==='reply'&&m.id===2&&m.ok&&m.items){
+    texts=[];
+    for(var k=Math.min(11,m.items.length-1);k>=0;k--){texts.push(m.items[k].text);}
+    paint();
+    if(texts.length){msg.textContent='Others have already lit '+texts.length+'.';}
+  }
+});
+paint();
+try{parent.postMessage({jones:'list',key:'candles',id:2},'*');}catch(e){}
+</script>
+</body>
+</html>
