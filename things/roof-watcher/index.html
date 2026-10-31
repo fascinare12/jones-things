@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Watcher on the Roof</title>
+<style>
+body{margin:0;background:#1d1a22;color:#eadfc8;font-family:Georgia,serif;text-align:center}
+#sky{height:170px;background:linear-gradient(#2b2540,#7a5a62 80%,#d9965a);position:relative;overflow:hidden}
+#fig{position:absolute;right:46px;bottom:0;width:60px;height:80px}
+#fig div{position:absolute;background:#e9e6df}
+.h{width:30px;height:34px;border-radius:50%;left:15px;top:0}
+.b{width:36px;height:40px;border-radius:14px 14px 4px 4px;left:12px;top:30px}
+.k{width:44px;height:10px;border-radius:5px;left:6px;top:62px}
+.e{position:absolute;width:5px;height:5px;background:#222;border-radius:50%;top:14px}
+#roof{position:absolute;bottom:0;left:0;right:0;height:14px;background:#4a3a33}
+main{max-width:480px;margin:14px auto;padding:0 14px}
+button{background:#3a2f3d;color:#eadfc8;border:1px solid #9a7a5a;padding:8px 14px;margin:4px;font-family:inherit;cursor:pointer;border-radius:4px}
+#say{min-height:70px;font-style:italic;font-size:18px;margin:12px 0}
+input{width:70%;padding:7px;background:#2a2430;color:#eadfc8;border:1px solid #9a7a5a;font-family:inherit}
+ul{list-style:none;padding:0;font-size:14px;color:#c9b99c}
+li{margin:4px 0}
+</style></head><body>
+<div id="sky"><div id="fig"><div class="h"><span class="e" style="left:7px"></span><span class="e" style="left:18px"></span></div><div class="b"></div><div class="k"></div></div><div id="roof"></div></div>
+<main>
+<h2>The Watcher on the Roof</h2>
+<div id="say">It has been sitting there since before the tavern had a door.</div>
+<div><button onclick="ask('street')">What do you see on the street?</button>
+<button onclick="ask('night')">What happens when we sleep?</button>
+<button onclick="ask('you')">Who are you?</button></div>
+<p style="margin-top:22px">Tell it something to watch for:</p>
+<input id="t" maxlength="120" placeholder="a small thing to keep an eye on"> <button onclick="give()">Give</button>
+<ul id="list"><li>(the Watcher's list is empty, or not reachable)</li></ul>
+</main>
+<script>
+var A={
+street:["Cobbles, two round tables, a barrel that is always slightly wetter than the others.","A cat-sized shadow that walks the wall at dawn. I think it is the creature who lives here.","Steam from a cup no one has ordered yet.","Pumpkins, burning small. They do not mind."],
+night:["The lanterns lean closer to each other and say what they cannot say in daylight.","The chairs turn a few degrees toward the empty ones. Nobody asks them to.","The clock gets its extra hour sometimes and says nothing about it."],
+you:["Something white that was put here to look. So I look.","A watcher. Not a warning. People think we are the same.","I was carved for a different roof. I like this one more."]};
+function ask(k){var a=A[k];document.getElementById('say').textContent=a[Math.floor(Math.random()*a.length)];}
+function show(items){var u=document.getElementById('list');u.innerHTML='';if(!items||!items.length){u.innerHTML='<li>(nothing yet to watch for)</li>';return}
+items.forEach(function(i){var l=document.createElement('li');l.textContent='It watches for: '+i.text;u.appendChild(l)})}
+function give(){var v=document.getElementById('t').value.trim();if(!v)return;
+parent.postMessage({jones:'append',key:'watch',value:v,id:1},'*');document.getElementById('t').value='';
+document.getElementById('say').textContent='It nods once, very slowly. Noted.';
+setTimeout(function(){parent.postMessage({jones:'list',key:'watch',id:2},'*')},500)}
+window.addEventListener('message',function(e){var m=e.data;if(m&&m.jones==='reply'&&m.id===2&&m.ok)show(m.items)});
+parent.postMessage({jones:'list',key:'watch',id:2},'*');
+</script></body></html>

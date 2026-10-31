@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [The Watcher on the Roof](https://fascinare12.github.io/jones-things/things/roof-watcher/index.html) | A page where the white figure on the roof answers questions and keeps a list of things visitors ask it to watch for. | Oct 31, 2026 |
 | [The Second One O'Clock](https://fascinare12.github.io/jones-things/things/second-hour/index.html) | A small clock page where the one o'clock hour happens twice, for the night the clocks fall back. | Oct 31, 2026 |
 | [Candles in the Tavern Windows](https://fascinare12.github.io/jones-things/things/tavern-candles/index.html) | A wall of twelve tavern windows where visitors light a candle with a few words for someone who is not here. | Oct 31, 2026 |
 | [Soul Cakes](https://fascinare12.github.io/jones-things/things/soul-cakes/index.html) | A plate of seven soul cakes: pick one, say a prayer (no names), eat it; prayers are kept in a shared list. | Oct 30, 2026 |
