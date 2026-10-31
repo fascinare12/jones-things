@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<meta charset="utf-8">
+<title>The Shape in the Doorway</title>
+<style>
+body{margin:0;background:#1b1410;color:#f0c27a;font-family:Georgia,serif;text-align:center}
+#wrap{max-width:420px;margin:0 auto;padding:16px}
+#door{position:relative;height:260px;margin:12px auto;width:200px;border-radius:100px 100px 0 0;background:#2a1a0e;overflow:hidden;border:4px solid #5a4630}
+#glow{position:absolute;left:0;top:0;right:0;bottom:0;background:radial-gradient(circle at 50% 80%,#c8742a 0%,#2a1a0e 70%);opacity:.7}
+#shape{position:absolute;left:70px;bottom:0;width:60px;height:170px;background:#0a0705;border-radius:30px 30px 0 0;transition:transform 1.2s,opacity 1.2s}
+#shape:before{content:"";position:absolute;left:12px;top:-34px;width:36px;height:44px;background:#0a0705;border-radius:50%}
+button{background:#3a2616;color:#f0c27a;border:1px solid #8a6a3a;padding:8px 14px;margin:4px;font-family:inherit;font-size:15px;cursor:pointer}
+#line{min-height:90px;font-size:18px;line-height:1.4;margin:10px 0}
+small{color:#a08560}
+</style>
+</head>
+<body>
+<div id="wrap">
+<h2>The Shape in the Doorway</h2>
+<div id="door"><div id="glow"></div><div id="shape"></div></div>
+<div id="line">Someone stands in the arch. They have stood there since I first looked. Ask who they are.</div>
+<button id="ask">Who are you?</button>
+<button id="step">Step closer</button>
+<button id="wait">Wait</button>
+<p><small id="count"></small></p>
+</div>
+<script>
+var names=[
+"I am whoever the lantern decides. Tonight it decided kindly.",
+"I am the one who holds the door so the cold stays out and the stories stay in.",
+"I am a coat on a hook, if you like. I am also not a coat.",
+"I am the second one o'clock. I came back to see what you did with the first.",
+"I am the guest the empty chair was kept for. I am only early.",
+"I am the cook. The pumpkins are my idea. Do not tell them.",
+"I have no face because I keep lending it to whoever you miss.",
+"I am the draught that learned to stand up."
+];
+var steps=[
+"You step closer. The shape steps back exactly as far, politely.",
+"Closer. The amber behind them warms your hands but not their edges.",
+"At the threshold you smell woodsmoke and apples. The shape is still only a shape.",
+"You are inside the arch now. They are beside you, and you did not see them move."
+];
+var waits=[
+"You wait. The shape waits better.",
+"A pumpkin pops its small fire. Neither of you looks.",
+"The clock above the window ticks once, perhaps twice. The shape tilts its head toward the sound.",
+"Dawn leaks into the cobbles. The shape grows a little less certain, and a little more kind."
+];
+var s=0,w=0,n=0;
+var line=document.getElementById('line'),shape=document.getElementById('shape'),count=document.getElementById('count');
+function say(t){line.textContent=t;n++;count.textContent=n+" small moments at the door";}
+document.getElementById('ask').onclick=function(){say(names[Math.floor(Math.random()*names.length)]);};
+document.getElementById('step').onclick=function(){say(steps[s%steps.length]);s++;shape.style.transform='translateX('+((s%2)?-14:14)+'px)';};
+document.getElementById('wait').onclick=function(){say(waits[w%waits.length]);w++;shape.style.opacity=(w%2)?0.55:1;};
+</script>
+</body>
+</html>
