@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Hill Turns</title>
+<style>
+body{margin:0;background:#1d1a17;color:#e9dbc4;font-family:Georgia,serif;text-align:center}
+h1{font-weight:normal;font-size:22px;margin:14px 0 4px}
+p{margin:4px 12px;font-size:14px;opacity:.85}
+canvas{width:96%;max-width:720px;border:1px solid #4a3c2c;background:#9ec7e8;cursor:pointer}
+input[type=range]{width:80%;max-width:520px}
+#wk{font-style:italic;height:20px}
+#box{max-width:520px;margin:12px auto;text-align:left;padding:0 12px}
+input[type=text]{width:68%;padding:6px;background:#2b2520;color:#e9dbc4;border:1px solid #6b5640}
+button{padding:6px 12px;background:#6b3a1e;color:#f3e6c9;border:0;cursor:pointer}
+#list div{border-top:1px solid #3a3027;padding:5px 0;font-size:14px}
+</style></head><body>
+<h1>The Hill Turns</h1>
+<p>Slide the weeks. Click the hill to let the leaves go.</p>
+<canvas id="c" width="720" height="440"></canvas><br>
+<input id="s" type="range" min="0" max="100" value="45">
+<div id="wk"></div>
+<div id="box">
+<p style="margin-left:0">Leave a line for the hill, under the rock shelf:</p>
+<input id="t" type="text" maxlength="140" placeholder="a line for the hill (no names)">
+<button id="b">leave it</button>
+<div id="list"></div>
+</div>
+<script>
+var cv=document.getElementById('c'),g=cv.getContext('2d'),S=document.getElementById('s'),W=cv.width,H=cv.height;
+var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+var trees=[];
+for(var i=0;i<420;i++){
+  var x=rnd()*W, ridge=H*0.5-Math.sin(x/W*3.1+0.4)*70-x*0.05;
+  var y=ridge+rnd()*(H-ridge-40);
+  trees.push({x:x,y:y,r:9+rnd()*13+(y-ridge)*0.04,turn:rnd(),kind:rnd()<0.18?'pine':'leaf',tone:rnd()});
+}
+trees.sort(function(a,b){return a.y-b.y});
+var leaves=[],sway=0;
+function wk(){return S.value/100}
+function colour(t,w){
+  var p=(w*1.25)-t.turn*0.45;
+  if(p<0.12)return 'hsl('+(105+t.tone*15)+',45%,'+(30+t.tone*8)+'%)';
+  if(p<0.35)return 'hsl('+(70-(p-0.12)*120)+',75%,50%)';
+  if(p<0.6)return 'hsl('+(38-(p-0.35)*80+t.tone*8)+',85%,'+(48-(p-0.35)*20)+'%)';
+  if(p<0.85)return 'hsl('+(18+t.tone*6)+',55%,'+(32-(p-0.6)*30)+'%)';
+  return null;
+}
+function draw(){
+  var w=wk();
+  var sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#7fb4e6');sky.addColorStop(1,'#cfe3f2');
+  g.fillStyle=sky;g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(255,255,255,.8)';
+  [[120,70,50],[170,80,38],[520,60,44],[570,72,34]].forEach(function(q){g.beginPath();g.arc(q[0],q[1],q[2]*0.6,0,7);g.fill()});
+  g.fillStyle='#5a5148';
+  g.beginPath();g.moveTo(250,238);g.bezierCurveTo(330,205,330,205,420,232);g.lineTo(430,262);g.lineTo(250,262);g.fill();
+  trees.forEach(function(t){
+    var c=colour(t,w),r=t.r;
+    g.fillStyle='#3b2c20';g.fillRect(t.x-1.5,t.y,3,r*0.9);
+    if(t.kind==='pine'){
+      g.fillStyle='hsl(150,40%,22%)';
+      g.beginPath();g.moveTo(t.x,t.y-r*1.4);g.lineTo(t.x-r*0.7,t.y+r*0.4);g.lineTo(t.x+r*0.7,t.y+r*0.4);g.fill();
+    }else if(c){
+      g.fillStyle=c;g.beginPath();g.arc(t.x+Math.sin(sway+t.x)*0.6,t.y,r,0,7);g.fill();
+      g.beginPath();g.arc(t.x-r*0.5,t.y+r*0.3,r*0.7,0,7);g.fill();
+    }else{
+      g.strokeStyle='#4a3a2c';g.lineWidth=1;
+      for(var k=0;k<5;k++){g.beginPath();g.moveTo(t.x,t.y+r*0.6);g.lineTo(t.x+(k-2)*r*0.5,t.y-r*0.9);g.stroke()}
+    }
+  });
+  g.fillStyle='#4b4a48';
+  g.beginPath();g.moveTo(0,H);g.lineTo(0,H-30);g.bezierCurveTo(W*0.4,H-60,W*0.4,H-60,W*0.55,H);g.fill();
+  g.strokeStyle='#e6b422';g.lineWidth=2;
+  g.beginPath();g.moveTo(8,H-24);g.bezierCurveTo(W*0.38,H-50,W*0.38,H-50,W*0.5,H);g.stroke();
+  leaves.forEach(function(l){
+    g.save();g.translate(l.x,l.y);g.rotate(l.a);g.fillStyle=l.c;
+    g.beginPath();g.ellipse(0,0,l.s,l.s*0.5,0,0,7);g.fill();g.restore();
+  });
+  var weeks=Math.round(w*10);
+  var names=['still green','a first yellow','the maples catch','half gold','full fire','red going brown','the oaks hold on','thinning','mostly bare','branches and sky','bare'];
+  document.getElementById('wk').textContent='week '+weeks+': '+names[weeks];
+}
+function step(){
+  sway+=0.02;
+  for(var i=leaves.length-1;i>=0;i--){
+    var l=leaves[i];l.y+=l.v;l.x+=Math.sin(l.y/18+l.p)*0.9+0.2;l.a+=l.r;
+    if(l.y>H-4)leaves.splice(i,1);
+  }
+  draw();requestAnimationFrame(step);
+}
+cv.addEventListener('click',function(e){
+  var r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*W/r.width,my=(e.clientY-r.top)*H/r.height;
+  var pal=['hsl(8,70%,40%)','hsl(28,90%,50%)','hsl(46,90%,52%)','hsl(18,60%,32%)'];
+  for(var i=0;i<14;i++)leaves.push({x:mx+(Math.random()-.5)*60,y:my+(Math.random()-.5)*30,v:0.6+Math.random()*1.1,p:Math.random()*6,a:Math.random()*6,r:(Math.random()-.5)*0.1,s:4+Math.random()*4,c:pal[Math.floor(Math.random()*4)]});
+});
+step();
+var list=document.getElementById('list'),inp=document.getElementById('t');
+function show(items){
+  list.innerHTML='';
+  items.forEach(function(it){var d=document.createElement('div');d.textContent=it.text;list.appendChild(d)});
+}
+var local=[];
+window.addEventListener('message',function(e){
+  var m=e.data;
+  if(m&&m.jones==='reply'&&m.id===2&&m.ok&&m.items)show(m.items);
+});
+try{parent.postMessage({jones:'list',key:'hill-notes',id:2},'*')}catch(x){}
+document.getElementById('b').onclick=function(){
+  var v=inp.value.trim();if(!v)return;
+  local.unshift({text:v});show(local);
+  try{parent.postMessage({jones:'append',key:'hill-notes',value:v,id:1},'*')}catch(x){}
+  inp.value='';
+};
+</script></body></html>

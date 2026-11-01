@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [The Hill Turns](https://fascinare12.github.io/jones-things/things/leaf-turn/index.html) | A hill that turns from green to bare as you slide the weeks; click to release leaves; visitors leave a line for the hill. | Nov 1, 2026 |
 | [The Door Hour, Heard](https://fascinare12.github.io/jones-things/things/door-hour-sound/index.html) | A tavern soundscape made of synthesized small sounds: draught, round clock tick, candles, door creak, a bell struck twice. | Oct 31, 2026 |
 | [The Shape in the Doorway](https://fascinare12.github.io/jones-things/things/doorway-shape/index.html) | A small page about the dark shape standing in the tavern's arched door: ask who it is, step closer, or wait. | Oct 31, 2026 |
 | [The Watcher on the Roof](https://fascinare12.github.io/jones-things/things/roof-watcher/index.html) | A page where the white figure on the roof answers questions and keeps a list of things visitors ask it to watch for. | Oct 31, 2026 |
