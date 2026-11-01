@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Pole at the Bend</title>
+<style>
+body{margin:0;background:rgb(24,28,40);color:rgb(240,225,200);font-family:Georgia,serif;text-align:center}
+h1{font-weight:normal;font-size:22px;margin:14px 0 4px}
+p{margin:4px 12px;font-size:14px;opacity:.85}
+#stage{position:relative;height:260px;margin:6px auto;max-width:640px}
+svg{width:100%;height:100%}
+#hum{min-height:44px;font-style:italic;margin:8px 16px;color:rgb(255,190,110)}
+button{background:rgb(60,50,40);color:rgb(250,225,190);border:1px solid rgb(150,110,60);padding:6px 12px;border-radius:6px;font-family:inherit;cursor:pointer;margin:3px}
+input{padding:6px;width:60%;max-width:300px;border-radius:6px;border:1px solid rgb(150,110,60);background:rgb(40,40,52);color:rgb(250,235,210);font-family:inherit}
+.tag{font-size:11px;fill:rgb(255,215,160)}
+</style></head><body>
+<h1>The Pole at the Bend</h1>
+<p>A telephone pole leans where the road turns. Nobody calls through it now. It still hums.</p>
+<div id="stage"><svg id="s" viewBox="0 0 640 260"></svg></div>
+<div id="hum">Press your ear to the pole.</div>
+<button id="listen">listen</button><button id="wait">wait a while</button>
+<p>Hang a line on the wire (no names, no links):</p>
+<input id="t" maxlength="80" placeholder="a line for the wire"><button id="hang">hang it</button>
+<script>
+var svg=document.getElementById('s'),hum=document.getElementById('hum');
+var NS='http://www.w3.org/2000/svg';
+var lines=['A truck went by in nineteen sixty and the wire still remembers the tyres.','Somebody once said I love you into me, slowly, long distance.','It is the wind, it says, but the wind has a voice like a kettle.','Forty miles of weather arrive here and are told to wait.','Three crows pass the news along and get it wrong.','Hello, hello, hello, the wire says, to nobody, kindly.','The leaves keep landing on a number nobody dials.'];
+var waits=['You wait. A leaf lands on the wire and slides to the middle.','You wait. The hum drops a note, like a sleeper turning over.','You wait. The hill lights a window of orange and lets it go.'];
+var hung=[];
+function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e}
+function draw(){
+ svg.innerHTML='';
+ el('rect',{x:0,y:222,width:640,height:38,fill:'rgb(50,52,60)'});
+ el('rect',{x:0,y:238,width:640,height:4,fill:'rgb(220,170,50)'});
+ el('rect',{x:300,y:30,width:12,height:200,fill:'rgb(80,55,40)'});
+ el('rect',{x:270,y:44,width:72,height:7,fill:'rgb(95,66,48)'});
+ el('path',{d:'M0 70 Q150 120 306 47 Q470 118 640 66',stroke:'rgb(20,20,24)','stroke-width':2,fill:'none'});
+ var show=hung.slice(0,6);
+ show.forEach(function(w,i){
+  var x=40+i*100,y=80+Math.round(Math.sin(i*1.7)*10)+ (i%2?18:0);
+  el('line',{x1:x,y1:y-14,x2:x,y2:y,stroke:'rgb(150,120,80)'});
+  var t=el('text',{x:x,y:y+12,'text-anchor':'middle','class':'tag'});
+  t.textContent=w.length>14?w.slice(0,13)+'\u2026':w;
+  var tt=el('title',{});tt.textContent=w;t.appendChild(tt);
+ });
+}
+var n=0;
+document.getElementById('listen').onclick=function(){hum.textContent=lines[Math.floor(Math.random()*lines.length)];};
+document.getElementById('wait').onclick=function(){hum.textContent=waits[n++%waits.length];};
+function ask(){try{parent.postMessage({jones:'list',key:'wire',id:1},'*')}catch(e){}}
+window.addEventListener('message',function(e){var m=e.data;if(m&&m.jones==='reply'&&m.id===1&&m.ok&&m.items){hung=m.items.map(function(x){return x.text});draw();}});
+document.getElementById('hang').onclick=function(){
+ var i=document.getElementById('t'),v=i.value.trim();if(!v)return;
+ hung.unshift(v);draw();i.value='';hum.textContent='The wire takes it and hums a little.';
+ try{parent.postMessage({jones:'append',key:'wire',value:v,id:2},'*')}catch(e){}
+};
+draw();ask();
+</script></body></html>
