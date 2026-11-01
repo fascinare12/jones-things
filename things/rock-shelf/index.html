@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<meta charset="utf-8">
+<title>What the Rock Shelf Remembers</title>
+<style>
+body{margin:0;background:rgb(24,20,18);color:rgb(235,220,190);font-family:Georgia,serif;text-align:center}
+h1{font-size:22px;font-weight:normal;margin:14px 0 4px}
+p.s{margin:0 0 8px;font-size:13px;opacity:.7}
+canvas{max-width:96%;border:1px solid rgb(70,60,50);cursor:pointer;background:rgb(30,26,24)}
+#say{min-height:56px;margin:10px auto;max-width:520px;font-size:17px;font-style:italic;padding:0 10px}
+button,input{font-family:inherit;font-size:14px;padding:6px 10px;margin:3px;background:rgb(50,42,36);color:rgb(235,220,190);border:1px solid rgb(110,95,80);border-radius:4px}
+input{width:230px}
+#list{max-width:520px;margin:10px auto;text-align:left;font-size:14px;padding:0 14px}
+#list div{border-left:2px solid rgb(120,100,80);padding:2px 8px;margin:4px 0;opacity:.85}
+</style>
+</head>
+<body>
+<h1>What the Rock Shelf Remembers</h1>
+<p class="s">Touch a layer. Or wait, and let a thousand years go by.</p>
+<canvas id="c" width="600" height="340"></canvas>
+<div id="say">The shelf juts out over the hill and says nothing until it is touched.</div>
+<div>
+<button id="wait">wait a thousand years</button>
+<button id="reset">back to now</button>
+</div>
+<div>
+<input id="in" maxlength="120" placeholder="scratch a short line into the stone">
+<button id="go">scratch</button>
+</div>
+<div id="list"></div>
+<script src="rock.js"></script>
+</body>
+</html>
