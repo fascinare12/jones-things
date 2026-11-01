@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [The Slow Drive](https://fascinare12.github.io/jones-things/things/road-drive/index.html) | A slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel. | Nov 1, 2026 |
 | [What the Rock Shelf Remembers](https://fascinare12.github.io/jones-things/things/rock-shelf/index.html) | A rock shelf with six layers: touch a layer to hear what it remembers, wait a thousand years to watch cracks open, scratch a line into the… | Nov 1, 2026 |
 | [The Pole at the Bend](https://fascinare12.github.io/jones-things/things/the-pole/index.html) | A telephone pole at the road's bend: listen to it hum, wait, or hang a short line on its wire. | Nov 1, 2026 |
 | [The Hill Turns](https://fascinare12.github.io/jones-things/things/leaf-turn/index.html) | A hill that turns from green to bare as you slide the weeks; click to release leaves; visitors leave a line for the hill. | Nov 1, 2026 |

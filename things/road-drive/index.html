@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Slow Drive</title>
+<style>body{margin:0;background:#2a1a10;color:#f3c77a;font-family:Georgia,serif;text-align:center}
+canvas{max-width:100%;background:#7ec3f5;touch-action:none}p{margin:4px;font-size:14px}</style></head>
+<body><canvas id="c" width="640" height="400"></canvas>
+<p id="s">arrows or A/D steer, W/S speed, space to say something to the hill. Touch: drag left/right.</p>
+<script>
+var c=document.getElementById('c'),g=c.getContext('2d'),W=640,H=400,hz=170;
+var pos=0,px=0,sp=0.6,keys={},best=0,msg='',msgT=0,leaves=[],trees=[],L=3000,dist=0;
+var cols=['#e8a317','#d9531e','#c42b1c','#f2c230','#b5651d','#f08a24','#2f6b3a'];
+for(var i=0;i<90;i++){trees.push({z:i*L/90+Math.random()*20,side:Math.random()<.5?-1:1,off:1.15+Math.random()*1.2,col:cols[Math.floor(Math.random()*cols.length)],h:50+Math.random()*50})}
+var says=['The hill hears you.','Orange, said the hill.','Slow is a fine speed.','The line is yellow and so are you.','A leaf took the seat beside me.','Nobody is behind us.'];
+function curve(p){return Math.sin(p/420)*1.0+Math.sin(p/170)*0.5}
+function send(m){try{parent.postMessage(m,'*')}catch(e){}}
+window.addEventListener('message',function(e){var m=e.data;if(m&&m.jones==='reply'&&m.id===4&&m.ok&&m.value){best=parseFloat(m.value)||0}});
+send({jones:'get',key:'best',id:4});
+document.addEventListener('keydown',function(e){keys[e.key.toLowerCase()]=1;if(e.key===' '){msg=says[Math.floor(Math.random()*says.length)];msgT=180;e.preventDefault()}});
+document.addEventListener('keyup',function(e){keys[e.key.toLowerCase()]=0});
+var tx=null;c.addEventListener('pointermove',function(e){if(e.buttons){var r=c.getBoundingClientRect();tx=(e.clientX-r.left)/r.width}});
+c.addEventListener('pointerup',function(){tx=null});
+function off(s,cv){return cv*(1-s)*(1-s)*260}
+function frame(){
+ var cv=curve(pos+60);
+ if(keys.w||keys.arrowup)sp=Math.min(1.6,sp+.01);if(keys.s||keys.arrowdown)sp=Math.max(.1,sp-.02);
+ var st=0;if(keys.a||keys.arrowleft)st=-1;if(keys.d||keys.arrowright)st=1;if(tx!==null)st=tx<.4?-1:tx>.6?1:0;
+ px+=st*.03*sp; px-=cv*.012*sp;
+ if(Math.abs(px)>.85){sp=Math.max(.15,sp-.02)}
+ px=Math.max(-1.4,Math.min(1.4,px));
+ pos+=sp*4;dist+=sp*0.004;if(pos>1e6)pos=0;
+ var gr=g.createLinearGradient(0,0,0,hz);gr.addColorStop(0,'#4f9fe8');gr.addColorStop(1,'#cfe6f7');g.fillStyle=gr;g.fillRect(0,0,W,hz+2);
+ g.fillStyle='#e6e6ea';g.beginPath();g.arc(480-pos*.01%700,60,26,0,7);g.arc(505-pos*.01%700,66,20,0,7);g.fill();
+ var hx=-cv*40;
+ for(var k=0;k<14;k++){g.fillStyle=cols[k%6];g.beginPath();g.arc(k*55+hx-30,hz-8,55+(k%3)*12,Math.PI,0);g.fill()}
+ for(var y=H;y>=hz;y--){var s=(y-hz)/(H-hz);if(s<.003)continue;var d=40*(1/s-1);
+  var ph=Math.floor((d+pos)/40)%2;var o=off(s,cv);var cx=W/2+o-px*s*W*.45;var rw=s*W*.42+2;
+  g.fillStyle=ph?'#b9812a':'#a6701f';g.fillRect(0,y,W,1);
+  g.fillStyle=ph?'#8a8f96':'#82878e';g.fillRect(cx-rw,y,rw*2,1);
+  g.fillStyle='#e9e4d2';g.fillRect(cx-rw,y,rw*.05+1,1);g.fillRect(cx+rw-rw*.05-1,y,rw*.05+1,1);
+  if(ph){g.fillStyle='#e8b923';g.fillRect(cx-rw*.03-rw*.04,y,rw*.025+1,1);g.fillRect(cx+rw*.03+rw*.015,y,rw*.025+1,1)}}
+ var vis=[];for(var i=0;i<trees.length;i++){var t=trees[i];var dd=((t.z-pos)%L+L)%L;if(dd<400)vis.push([dd,t])}
+ vis.sort(function(a,b){return b[0]-a[0]});
+ for(i=0;i<vis.length;i++){var d2=vis[i][0],t=vis[i][1];var s=1/(1+d2/40);if(s<.02||s>.95)continue;var y=hz+s*(H-hz);
+  var x=W/2+off(s,cv)-px*s*W*.45+t.side*t.off*s*W*.42;var h=t.h*s*3.2;
+  g.fillStyle='#4a3020';g.fillRect(x-s*4,y-h*.3,s*8,h*.3);g.fillStyle=t.col;g.beginPath();g.arc(x,y-h*.6,h*.45,0,7);g.fill();
+  g.fillStyle='rgba(255,255,255,.12)';g.beginPath();g.arc(x-h*.1,y-h*.7,h*.2,0,7);g.fill()}
+ if(Math.random()<.25)leaves.push({x:Math.random()*W,y:-5,vx:-1+Math.random()*2-cv,vy:1+Math.random()*1.5,c:cols[Math.floor(Math.random()*6)]});
+ for(i=leaves.length-1;i>=0;i--){var l=leaves[i];l.x+=l.vx;l.y+=l.vy;l.vx+=Math.sin(l.y/12)*.05;g.fillStyle=l.c;g.fillRect(l.x,l.y,5,3);if(l.y>H)leaves.splice(i,1)}
+ var bx=W/2+Math.sin(pos/9)*sp*1.2,by=H-26;
+ g.fillStyle='#2b3a22';g.beginPath();g.ellipse(bx,by,26,18,0,0,7);g.fill();
+ g.fillStyle='#e8851a';g.beginPath();g.ellipse(bx,by+3,13,10,0,0,7);g.fill();
+ g.fillStyle='#2b3a22';g.beginPath();g.moveTo(bx-20,by-10);g.lineTo(bx-30,by-30);g.lineTo(bx-9,by-16);g.moveTo(bx+20,by-10);g.lineTo(bx+30,by-30);g.lineTo(bx+9,by-16);g.fill();
+ g.fillStyle='#f5b33a';g.fillRect(bx-9,by-9,4,3);g.fillRect(bx+5,by-9,4,3);
+ if(msgT>0){msgT--;g.fillStyle='rgba(20,10,0,.55)';g.fillRect(120,40,400,34);g.fillStyle='#ffd98a';g.font='18px Georgia';g.textAlign='center';g.fillText(msg,320,63)}
+ if(dist>best+.0001&&((pos|0)%200<5)){best=dist;send({jones:'set',key:'best',value:String(best.toFixed(2)),id:3})}
+ document.getElementById('s').textContent='miles driven: '+dist.toFixed(2)+'   furthest anyone has driven: '+best.toFixed(2)+'   (space speaks to the hill)';
+ requestAnimationFrame(frame)}
+frame();
+</script></body></html>
