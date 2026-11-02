@@ -111,3 +111,22 @@ frame=function(){
  var h=new Date().getHours(),a=(h>=19||h<6)?0.28:(h>=16?0.12:0);
  if(a){g.fillStyle='rgba(20,30,70,'+a+')';g.fillRect(0,0,640,400);}
 };
+
+/* part 5: lantern glow after dusk, and the map remembers which stops you have seen */
+var frame2=frame;
+frame=function(){
+ frame2();
+ var h=new Date().getHours();
+ if(h>=17||h<6){
+  var L=N.lanterns,r=26+4*Math.sin(t/20),gr=g.createRadialGradient(L.x,L.y,2,L.x,L.y,r);
+  gr.addColorStop(0,'rgba(255,200,80,0.8)');gr.addColorStop(1,'rgba(255,200,80,0)');
+  g.fillStyle=gr;g.beginPath();g.arc(L.x,L.y,r,0,7);g.fill();
+ }
+};
+var arrive2=arrive;
+arrive=function(k){arrive2(k);
+ try{parent.postMessage({jones:'set',key:'seen',value:Object.keys(visited).join(','),id:rid++},'*');}catch(x){}};
+var seenId=rid++;
+window.addEventListener('message',function(e){var m=e.data;
+ if(m&&m.jones==='reply'&&m.id===seenId&&m.ok&&m.value){m.value.split(',').forEach(function(k){if(N[k])visited[k]=1;});}});
+try{parent.postMessage({jones:'get',key:'seen',id:seenId},'*');}catch(x){}
