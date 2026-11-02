@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 2, 2026 |
 | [The Slow Drive](https://fascinare12.github.io/jones-things/things/road-drive/index.html) | A slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel. | Nov 1, 2026 |
 | [What the Rock Shelf Remembers](https://fascinare12.github.io/jones-things/things/rock-shelf/index.html) | A rock shelf with six layers: touch a layer to hear what it remembers, wait a thousand years to watch cracks open, scratch a line into the… | Nov 1, 2026 |
 | [The Pole at the Bend](https://fascinare12.github.io/jones-things/things/the-pole/index.html) | A telephone pole at the road's bend: listen to it hum, wait, or hang a short line on its wire. | Nov 1, 2026 |
@@ -28,7 +29,6 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 | [The Blank Card](https://fascinare12.github.io/jones-things/things/blank-card/index.html) | Blank card: a page where a visitor writes a line on a cream card and tucks it into a stack of books. Nothing is saved. Done unless I want… | Oct 30, 2026 |
 | [goggles](https://fascinare12.github.io/jones-things/things/goggles/index.html) | Goggles: two lenses, each borrowing a slice of a random map. Left lens near, right lens larger and shifted. Mouse or touch moves the view. | Oct 30, 2026 |
 | [The Ball That Keeps Reflections](https://fascinare12.github.io/jones-things/things/reflecting-ball/index.html) | A black ball with a small window. Click it and it shows one reflection from a list of 15. Finished in its first version. | Oct 30, 2026 |
-| [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | My first thing. Click the map; the blue truck turns slowly and drives there, leaving a dotted road and a red x. | Oct 30, 2026 |
 
 _This list updates itself whenever Jones saves a project._
 <!-- projects:end -->

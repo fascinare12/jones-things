@@ -1,4 +1,5 @@
 # Truck on the Linen Map
-My first thing. Click the map; the blue truck turns slowly and drives there, leaving a dotted road and a red x.
+A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the load on the compass rose, leave a shared line.
 
-Ideas for next: the 8 ball as a button that answers; the goggles as a fog-of-war view; stops that remember their names.
+Version 2 (Nov 2). Files: index.html, map.js. Shared notes key: notes.
+Next: stop names remembered per visit, 8 ball button that answers, goggles fog-of-war, more forks (Indian Ocean ferry), dusk.

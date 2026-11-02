@@ -2,41 +2,18 @@
 <html><head>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>Truck on the Linen Map</title>
 <style>
-body{margin:0;background:#b9cbd8;font-family:Georgia,serif;color:#4a3a2a;text-align:center}
-canvas{background:#efe2c2;border:8px solid #f6edd6;margin-top:10px;max-width:95vw;cursor:crosshair}
+body{margin:0;background:rgb(185,203,216);font-family:Georgia,serif;color:rgb(74,58,42);text-align:center}
+canvas{background:rgb(239,226,194);border:8px solid rgb(246,237,214);margin-top:10px;max-width:95vw;cursor:pointer}
 p{margin:6px;font-size:14px}
+#box{display:none}
+input{font:inherit;padding:3px;width:260px}
+button{font:inherit;padding:3px 10px}
+#notes{font-size:13px;font-style:italic;max-width:620px;margin:6px auto}
 </style></head><body>
-<p>Click the map. The little blue truck will go there and leave a dotted road.</p>
+<p id="top">The blue truck waits at the quiet harbour. Click a glowing stop to drive there.</p>
 <canvas id="c" width="640" height="400"></canvas>
-<p id="msg">Nothing visited yet.</p>
-<script>
-const c=document.getElementById('c'),x=c.getContext('2d'),msg=document.getElementById('msg');
-let t={x:320,y:200,a:0,tx:320,ty:200},trail=[],stops=[];
-const names=["a quiet harbour","the place with two moons","somewhere with bread","a hill that hums","the edge of the card","a town of lanterns","salt flats","a window in a ball"];
-const blobs=[[150,140,90,60],[190,280,45,70],[400,120,100,50],[440,230,50,60],[540,300,40,25]];
-function land(){x.fillStyle='#c9b98a';
- blobs.forEach(b=>{x.beginPath();x.ellipse(b[0],b[1],b[2],b[3],0.3,0,7);x.fill();});
- x.strokeStyle='#d8c9a0';x.lineWidth=1;
- for(let i=0;i<=640;i+=40){x.beginPath();x.moveTo(i,0);x.lineTo(i,400);x.stroke();}
- for(let j=0;j<=400;j+=40){x.beginPath();x.moveTo(0,j);x.lineTo(640,j);x.stroke();}}
-c.onclick=e=>{const r=c.getBoundingClientRect();
- t.tx=(e.clientX-r.left)*640/r.width;t.ty=(e.clientY-r.top)*400/r.height;
- stops.push([t.tx,t.ty]);
- msg.textContent="Heading for "+names[Math.floor(Math.random()*names.length)]+". Stops so far: "+stops.length+".";};
-function truck(){x.save();x.translate(t.x,t.y);x.rotate(t.a);
- x.fillStyle='#f1e6bd';x.fillRect(-14,-7,28,14);
- x.fillStyle='#6fb0dc';x.fillRect(-14,-7,18,14);x.fillRect(-14,-7,28,6);
- x.fillStyle='#222';x.fillRect(-10,-9,7,3);x.fillRect(5,-9,7,3);x.fillRect(-10,6,7,3);x.fillRect(5,6,7,3);
- x.restore();}
-function step(){
- const dx=t.tx-t.x,dy=t.ty-t.y,d=Math.hypot(dx,dy);
- if(d>2){const want=Math.atan2(dy,dx);let da=want-t.a;
-  while(da>Math.PI)da-=2*Math.PI;while(da<-Math.PI)da+=2*Math.PI;
-  t.a+=da*0.08;t.x+=Math.cos(t.a)*1.8;t.y+=Math.sin(t.a)*1.8;
-  if(trail.length==0||Math.hypot(trail[trail.length-1][0]-t.x,trail[trail.length-1][1]-t.y)>7)trail.push([t.x,t.y]);}
- x.clearRect(0,0,640,400);land();
- x.fillStyle='#8a5a3a';trail.forEach(p=>{x.beginPath();x.arc(p[0],p[1],1.6,0,7);x.fill();});
- x.strokeStyle='#a33';stops.forEach(s=>{x.beginPath();x.moveTo(s[0]-5,s[1]-5);x.lineTo(s[0]+5,s[1]+5);x.moveTo(s[0]+5,s[1]-5);x.lineTo(s[0]-5,s[1]+5);x.stroke();});
- truck();requestAnimationFrame(step);}
-step();
-</script></body></html>
+<p id="msg"></p>
+<p id="box">Leave a line at this stop: <input id="inp" maxlength="120"> <button id="go">leave</button></p>
+<div id="notes"></div>
+<script src="map.js"></script>
+</body></html>
