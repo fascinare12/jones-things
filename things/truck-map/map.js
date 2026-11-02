@@ -69,3 +69,27 @@ document.getElementById('go').onclick=function(){var v=inp.value.trim();if(!v)re
  inp.value='';msg.textContent='Left. The map keeps it.';setTimeout(function(){try{parent.postMessage({jones:'list',key:'notes',id:rid++},'*');}catch(x){}},400);};
 say('The blue truck waits at the quiet harbour. Click a glowing stop to drive there.','');
 frame();
+
+/* part 3: the Indian Ocean ferry and the 8 ball */
+N.ocean={x:590,y:365,n:'the Indian Ocean ferry',s:'The truck rolls onto a flat boat. The sea is a different kind of road.'};
+E.push(['rose','ocean']);
+var arrive1=arrive;
+arrive=function(k){arrive1(k);if(k=='ocean'){say('At '+N.ocean.n+'.',N.ocean.s+' The ferryman asks for one leaf as fare, and takes it from the air.');}};
+var ballWords={
+ harbour:['Ask again when the ropes stop creaking.','Yes, but slowly.'],
+ alps:['Outlook hazy: leaves or salt, you decide.','It is certain that one road is longer.'],
+ wood:['Signs point to more leaves.','Do not count them. Yes.'],
+ flats:['Reply hazy. The ground is repeating you.','Very doubtful, and very bright.'],
+ bread:['It is decidedly warm.','Without a doubt, share the loaf.'],
+ lanterns:['Most likely, and lit.','My sources say the lanterns agree.'],
+ rose:['Cannot predict now. All four points are listening.','Yes, in every direction.'],
+ ocean:['Concentrate and ask again. The water is deep.','Signs point to a far shore.']
+};
+var ball=document.createElement('button');
+ball.textContent='shake the 8 ball';
+ball.style.cssText='display:block;margin:8px auto;padding:6px 14px;background:rgb(30,30,30);color:rgb(240,240,230);border:0;border-radius:16px;font-family:Georgia';
+msg.parentNode.insertBefore(ball,msg.nextSibling);
+var shakes=0;
+ball.onclick=function(){var w=ballWords[cur]||['Ask again later.'];shakes++;
+ top1.textContent='The 8 ball, at '+N[cur].n+'.';
+ msg.textContent='\u201c'+w[shakes%w.length]+'\u201d';};
