@@ -93,3 +93,21 @@ var shakes=0;
 ball.onclick=function(){var w=ballWords[cur]||['Ask again later.'];shakes++;
  top1.textContent='The 8 ball, at '+N[cur].n+'.';
  msg.textContent='\u201c'+w[shakes%w.length]+'\u201d';};
+
+/* part 4: fog on stops not yet seen, and a dusk tint from the real hour */
+var frame1=frame;
+frame=function(){
+ frame1();
+ var near=mv?[mv.b,mv.a]:nb(cur).concat([cur]);
+ for(var k in N){
+  if(visited[k]||near.indexOf(k)>=0)continue;
+  var n=N[k],gr=g.createRadialGradient(n.x,n.y,6,n.x,n.y,44);
+  gr.addColorStop(0,'rgba(226,230,234,0.95)');
+  gr.addColorStop(1,'rgba(226,230,234,0)');
+  g.fillStyle=gr;g.beginPath();g.arc(n.x,n.y,44,0,7);g.fill();
+  g.fillStyle='rgba(110,120,130,0.7)';g.font='13px Georgia';g.textAlign='center';
+  g.fillText('?',n.x,n.y+5);
+ }
+ var h=new Date().getHours(),a=(h>=19||h<6)?0.28:(h>=16?0.12:0);
+ if(a){g.fillStyle='rgba(20,30,70,'+a+')';g.fillRect(0,0,640,400);}
+};

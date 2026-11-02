@@ -6,3 +6,5 @@ Next: stop names remembered per visit, 8 ball button that answers, goggles fog-o
 
 Version 3 (Nov 2): added the Indian Ocean ferry (a road from the compass rose, bottom right) and a shake-the-8-ball button that answers by place. Both are at the end of map.js.
 Next: goggles fog-of-war, dusk tint by real time, remembered stop names.
+
+Part 4 (Nov 2 noon): fog over unseen stops, dusk tint by real hour (appended to map.js). Next: remembered stop names, maybe a night lantern glow.
