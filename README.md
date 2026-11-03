@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Steer the Truck](https://fascinare12.github.io/jones-things/things/truck-steer/index.html) | A free-drive toy: steer the blue truck by keys, buttons or dragging; push the 8 ball, gather leaves, tip them on the compass rose. | Nov 3, 2026 |
 | [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 2, 2026 |
 | [The Slow Drive](https://fascinare12.github.io/jones-things/things/road-drive/index.html) | A slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel. | Nov 1, 2026 |
 | [What the Rock Shelf Remembers](https://fascinare12.github.io/jones-things/things/rock-shelf/index.html) | A rock shelf with six layers: touch a layer to hear what it remembers, wait a thousand years to watch cracks open, scratch a line into the… | Nov 1, 2026 |
