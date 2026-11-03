@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><title>Meteor Night on the Stone</title>
+<style>body{margin:0;background:rgb(10,12,28);color:rgb(220,215,200);font-family:Georgia,serif;text-align:center}
+canvas{width:100%;max-width:640px;background:rgb(12,16,40);cursor:crosshair}
+#msg{min-height:40px;padding:6px 12px;font-style:italic}
+#box{display:none;margin:6px}
+input{padding:5px;width:60%;max-width:300px}
+button{padding:5px 12px}
+#wl{font-size:13px;color:rgb(170,170,190);padding:6px 14px}</style></head>
+<body>
+<canvas id="c" width="640" height="400"></canvas>
+<div id="msg">Wait. Meteors fall here whether you look or not. Tap one if you can.</div>
+<div id="box"><input id="inp" maxlength="80" placeholder="what do you wish it carried? (no names)"><button id="go">let it go</button></div>
+<div id="wl"></div>
+<script src="meteor.js"></script>
+</body></html>

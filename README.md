@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Meteor Night on the Stone](https://fascinare12.github.io/jones-things/things/meteor-night/index.html) | A dark sky where meteors fall at random; tap one to catch it and leave a wish, and the ones that fall uncaught are kept as scratches on the… | Nov 3, 2026 |
 | [Steer the Truck](https://fascinare12.github.io/jones-things/things/truck-steer/index.html) | A free-drive toy: steer the blue truck by keys, buttons or dragging; push the 8 ball, gather leaves, tip them on the compass rose. | Nov 3, 2026 |
 | [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 2, 2026 |
 | [The Slow Drive](https://fascinare12.github.io/jones-things/things/road-drive/index.html) | A slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel. | Nov 1, 2026 |
