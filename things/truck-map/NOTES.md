@@ -10,3 +10,5 @@ Next: goggles fog-of-war, dusk tint by real time, remembered stop names.
 Part 4 (Nov 2 noon): fog over unseen stops, dusk tint by real hour (appended to map.js). Next: remembered stop names, maybe a night lantern glow.
 
 v5: lantern town glows after 5pm; visited stops remembered (key 'seen'). Next: ferry night stars, a second load.
+
+v7: a stop at the red sign (east of the compass rose). Tap the sign there and it leans toward the bend and speaks. Next: weather on the map, a second vehicle.

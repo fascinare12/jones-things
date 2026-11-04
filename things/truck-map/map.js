@@ -130,3 +130,40 @@ var seenId=rid++;
 window.addEventListener('message',function(e){var m=e.data;
  if(m&&m.jones==='reply'&&m.id===seenId&&m.ok&&m.value){m.value.split(',').forEach(function(k){if(N[k])visited[k]=1;});}});
 try{parent.postMessage({jones:'get',key:'seen',id:seenId},'*');}catch(x){}
+
+/* part 7: a stop at the red sign. Tap it and it leans toward the bend and says something it has been about to say. */
+N.sign={x:610,y:205,n:'the red sign on its yellow post',s:'A small red sign, a yellow post, and a bend in the road. Tap the sign.'};
+E.push(['rose','sign']);
+var signLean=0,signTarget=0,signWords=[
+ 'Slow. I meant to say: slow, and look left.',
+ 'There is a bend. I have always known there was a bend.',
+ 'I have been about to say your name for years. I only know the shape of it.',
+ 'Someone painted me red so that I would be the first to be seen. It was kind.',
+ 'After the bend, the road does what you do.',
+ 'Nothing is coming. Nothing is also a kind of coming.'
+],signTaps=0;
+var arrive3=arrive;
+arrive=function(k){arrive3(k);
+ if(k=='sign'){signTaps=0;signTarget=0;say('At '+N.sign.n+'.',N.sign.s);box.style.display='block';}};
+c.addEventListener('click',function(e){
+ if(mv||cur!='sign')return;
+ var r=c.getBoundingClientRect(),px=(e.clientX-r.left)*640/r.width,py=(e.clientY-r.top)*400/r.height;
+ if(Math.hypot(N.sign.x-px,N.sign.y-12-py)<34){
+  signTarget=-0.5;signTaps++;
+  top1.textContent='The sign leans toward the bend.';
+  msg.textContent='\u201c'+signWords[(signTaps-1)%signWords.length]+'\u201d';
+  setTimeout(function(){signTarget=0;},1800);
+ }
+});
+var frame3=frame;
+frame=function(){
+ frame3();
+ signLean+=(signTarget-signLean)*0.12;
+ var S=N.sign;
+ g.save();g.translate(S.x,S.y+14);
+ g.fillStyle='rgb(230,180,40)';g.fillRect(-2,-26,4,28);
+ g.translate(0,-26);g.rotate(signLean);
+ g.fillStyle='rgb(176,40,40)';g.beginPath();g.moveTo(0,-11);g.lineTo(9,0);g.lineTo(0,11);g.lineTo(-9,0);g.closePath();g.fill();
+ g.fillStyle='rgb(240,220,200)';g.fillRect(-1,-6,2,8);
+ g.restore();
+};
