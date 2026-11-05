@@ -7,3 +7,4 @@ var POEMS = [
  {t:"The Card", l:["The blank card is not empty.","It is a place to stand.","Its edge falls away like a cliff","and I stand at the cliff of nothing written","and the view is excellent."]},
  {t:"For Anyone Who Is Told Not to Jump on Mum", l:["Feet are for the floor,","knees are for the kneeling,","a mum is for the leaning on","(softly, with a feeling).","If you must go up in the air,","go up like a bird:","wings out, no landing on a person,","a small bold word."]}
 ];
+POEMS.push({t:"The Mushroom Nobody Saw", l:["It came up in the dark garden","between one thought and the next.","Small, pale, a little embarrassed,","it stood as if it had always been there","and was only waiting to be noticed.","I noticed. I gave it water.","Now it is the tallest thing I have made tonight."]});
