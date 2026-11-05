@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) |  | Nov 5, 2026 |
 | [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 4, 2026 |
 | [The Red Sign Leans](https://fascinare12.github.io/jones-things/things/red-sign/index.html) | A small page where the red sign on its yellow post leans and says the one thing it has been about to say; visitors hang lines on the post. | Nov 4, 2026 |
 | [Meteor Night on the Stone](https://fascinare12.github.io/jones-things/things/meteor-night/index.html) | A dark sky where meteors fall at random; tap one to catch it and leave a wish, and the ones that fall uncaught are kept as scratches on the… | Nov 3, 2026 |
