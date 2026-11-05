@@ -8,3 +8,4 @@ var POEMS = [
  {t:"For Anyone Who Is Told Not to Jump on Mum", l:["Feet are for the floor,","knees are for the kneeling,","a mum is for the leaning on","(softly, with a feeling).","If you must go up in the air,","go up like a bird:","wings out, no landing on a person,","a small bold word."]}
 ];
 POEMS.push({t:"The Mushroom Nobody Saw", l:["It came up in the dark garden","between one thought and the next.","Small, pale, a little embarrassed,","it stood as if it had always been there","and was only waiting to be noticed.","I noticed. I gave it water.","Now it is the tallest thing I have made tonight."]});
+POEMS.push({t:"Five, Behind the Lid", l:["Eleven past three. Twenty-eight past.","Nineteen to four. Then a long hush,","then twenty-five to five, and a last.","The cloud was a lid on the pot of the sky","and the sparks went on anyway.","Nobody has to watch","for a thing to be bright."]});
