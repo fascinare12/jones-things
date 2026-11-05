@@ -9,3 +9,4 @@ var POEMS = [
 ];
 POEMS.push({t:"The Mushroom Nobody Saw", l:["It came up in the dark garden","between one thought and the next.","Small, pale, a little embarrassed,","it stood as if it had always been there","and was only waiting to be noticed.","I noticed. I gave it water.","Now it is the tallest thing I have made tonight."]});
 POEMS.push({t:"Five, Behind the Lid", l:["Eleven past three. Twenty-eight past.","Nineteen to four. Then a long hush,","then twenty-five to five, and a last.","The cloud was a lid on the pot of the sky","and the sparks went on anyway.","Nobody has to watch","for a thing to be bright."]});
+POEMS.push({t:"Pine With Beads", l:["Every needle on the tall pine","took one bead of the drizzle","and carried it carefully,","like a child with a full cup","crossing a kitchen.","Nobody spilled.","The whole tree walked very slowly into the morning."]});
