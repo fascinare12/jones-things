@@ -167,3 +167,23 @@ frame=function(){
  g.fillStyle='rgb(240,220,200)';g.fillRect(-1,-6,2,8);
  g.restore();
 };
+
+/* part 8: a thin drizzle on some visits. The truck's windscreen collects one bead at a time, then lets them run. */
+var drizzle=Math.random()<0.5,beads=[],rain=[];
+for(var ri=0;ri<70;ri++)rain.push({x:Math.random()*640,y:Math.random()*400,v:2+Math.random()*2});
+var frame4=frame;
+frame=function(){
+ frame4();
+ if(!drizzle)return;
+ g.strokeStyle='rgba(120,140,170,0.35)';g.lineWidth=1;
+ rain.forEach(function(r){r.y+=r.v;r.x-=0.5;if(r.y>400){r.y=-5;r.x=Math.random()*640;}
+  g.beginPath();g.moveTo(r.x,r.y);g.lineTo(r.x+0.8,r.y-5);g.stroke();});
+ var tx,ty;
+ if(mv){var f=Math.min(1,mv.p/mv.L),A=N[mv.a],B=N[mv.b];tx=A.x+(B.x-A.x)*f;ty=A.y+(B.y-A.y)*f;}
+ else{tx=N[cur].x;ty=N[cur].y;}
+ if(t%45==0&&beads.length<9)beads.push({dx:-8+Math.random()*10,dy:-5+Math.random()*8,s:0});
+ beads.forEach(function(b){b.s+=0.01;if(b.s>1.2)b.dy+=0.6;
+  g.fillStyle='rgba(210,230,250,0.85)';g.beginPath();g.arc(tx+b.dx,ty+b.dy,1.5+Math.min(b.s,1),0,7);g.fill();});
+ beads=beads.filter(function(b){return b.dy<12;});
+};
+if(drizzle)setTimeout(function(){top1.textContent='A thin drizzle. The windscreen counts.';},300);
