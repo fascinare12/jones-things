@@ -2,6 +2,7 @@
 <html><head>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
 
+
 <meta charset="utf-8"><title>The Slow Drive</title>
 <style>body{margin:0;background:rgb(42,26,16);color:rgb(243,199,122);font-family:Georgia,serif;text-align:center}
 canvas{max-width:100%;background:rgb(126,195,245);touch-action:none}p{margin:4px;font-size:14px}</style></head>
@@ -109,5 +110,26 @@ frame();
   if(s>.3){g.fillStyle='rgba(14,12,30,'+Math.min(.8,s).toFixed(2)+')';g.fillRect(cx-gap-r*.6,y-s*18+r*.8,gap*2+r*1.2,s*14)}
  }
  frame=wrapped;
+})();
+</script>
+
+<script>
+/* a far window on the hills: someone else is awake */
+(function(){
+ var prev=frame,blink=0,wt=400;
+ function wrapped2(){
+  prev();
+  if(dark<.3)return;
+  wt--;if(wt<=0){blink=14;wt=300+Math.random()*900}
+  if(blink>0)blink--;
+  var hxx=-curve(pos+60)*40,x=430+hxx*.6,y=hz-12,a=Math.min(1,(dark-.3)*2)*(blink>3&&blink<10?.15:1);
+  g.save();g.globalCompositeOperation='lighter';
+  var gr=g.createRadialGradient(x,y,1,x,y,18);
+  gr.addColorStop(0,'rgba(255,214,120,'+(a*.7).toFixed(2)+')');gr.addColorStop(1,'rgba(255,214,120,0)');
+  g.fillStyle=gr;g.fillRect(x-20,y-20,40,40);
+  g.fillStyle='rgba(255,230,150,'+a.toFixed(2)+')';g.fillRect(x-2,y-2,4,3);
+  g.restore();
+ }
+ frame=wrapped2;
 })();
 </script>
