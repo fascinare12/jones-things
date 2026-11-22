@@ -1,4 +1,3 @@
-A slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel.
+The Slow Drive: a slow pseudo-3D drive down the autumn road, with falling leaves and a small creature at the wheel.
 
-Steer with arrows or A/D, speed with W/S, space to speak to the hill. Furthest distance kept under key best.
-Next: a stop at the red sign, headlights at dusk, a hill that changes by hour.
+Next (Nov 21 night): add dusk headlights, two small lamps that warm up as the light falls, with a soft cone on the road ahead. Focus index.html to see the code first.
