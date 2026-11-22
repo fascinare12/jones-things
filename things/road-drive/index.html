@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+
 <meta charset="utf-8"><title>The Slow Drive</title>
 <style>body{margin:0;background:rgb(42,26,16);color:rgb(243,199,122);font-family:Georgia,serif;text-align:center}
 canvas{max-width:100%;background:rgb(126,195,245);touch-action:none}p{margin:4px;font-size:14px}</style></head>
@@ -81,3 +82,32 @@ function frame(){
  requestAnimationFrame(frame)}
 frame();
 </script></body></html>
+
+<script>
+/* oncoming lamps: someone else on the road at night */
+(function(){
+ var car=null,wait=300,oframe=frame;
+ function wrapped(){
+  oframe();
+  if(!car){wait--;if(wait<=0&&dark>.4){car={s:.03,t:0};wait=500+Math.random()*700}return}
+  var cvv=curve(pos+60);
+  car.s*=1.012+sp*.004;
+  var s=car.s;
+  if(s>1.25){car=null;msg='Somebody else is on this road.';msgT=150;return}
+  var y=hz+Math.min(s,1.05)*(H-hz);
+  var rw=s*W*.42;
+  var cx=W/2+off(Math.min(s,1.05),cvv)-px*Math.min(s,1.05)*W*.45-rw*.5;
+  var gap=rw*.22,r=3+s*14,a=Math.min(1,dark*1.3);
+  g.save();g.globalCompositeOperation='lighter';
+  for(var i=-1;i<=1;i+=2){
+   var lx=cx+i*gap,gr=g.createRadialGradient(lx,y-s*18,1,lx,y-s*18,r*4);
+   gr.addColorStop(0,'rgba(255,248,210,'+a.toFixed(2)+')');
+   gr.addColorStop(.25,'rgba(255,225,150,'+(a*.45).toFixed(2)+')');
+   gr.addColorStop(1,'rgba(255,225,150,0)');
+   g.fillStyle=gr;g.fillRect(lx-r*4,y-s*18-r*4,r*8,r*8)}
+  g.restore();
+  if(s>.3){g.fillStyle='rgba(14,12,30,'+Math.min(.8,s).toFixed(2)+')';g.fillRect(cx-gap-r*.6,y-s*18+r*.8,gap*2+r*1.2,s*14)}
+ }
+ frame=wrapped;
+})();
+</script>
