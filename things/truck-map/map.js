@@ -187,3 +187,32 @@ frame=function(){
  beads=beads.filter(function(b){return b.dy<12;});
 };
 if(drizzle)setTimeout(function(){top1.textContent='A thin drizzle. The windscreen counts.';},300);
+
+
+/* part 9: a slow hay cart. It wanders from stop to stop, sits a while at each, and the truck must wait behind it. */
+var cart={a:'alps',b:'alps',p:0,L:1,wait:400,at:'alps'};
+function cartStep(){
+ if(cart.wait>0){cart.wait--;if(cart.wait==0){var o=nb(cart.at);cart.a=cart.at;cart.b=o[Math.floor(Math.random()*o.length)];cart.p=0;cart.L=len(cart.a,cart.b);}return;}
+ cart.p+=0.5;
+ if(cart.p>=cart.L){cart.at=cart.b;cart.a=cart.b;cart.p=0;cart.wait=300;}
+}
+c.addEventListener('click',function(e){
+ if(mv)return;
+ if(cart.wait>0&&cart.at==cur){
+  e.stopImmediatePropagation();
+  top1.textContent='The hay cart is across the road at '+N[cur].n+'.';
+  msg.textContent='It is not in a hurry. Wait for it to move on, then try a glowing stop.';
+ }
+},true);
+var frame5=frame;
+frame=function(){
+ cartStep();
+ if(mv&&cart.wait==0&&cart.a==mv.a&&cart.b==mv.b){var gap=cart.p-mv.p;if(gap>0&&gap<40)mv.p-=1.2;}
+ frame5();
+ var cx,cy;
+ if(cart.wait>0){cx=N[cart.at].x+12;cy=N[cart.at].y-14;}
+ else{var f=cart.p/cart.L,A=N[cart.a],B=N[cart.b];cx=A.x+(B.x-A.x)*f;cy=A.y+(B.y-A.y)*f-6;}
+ g.fillStyle='rgb(120,80,48)';g.fillRect(cx-9,cy-4,18,9);
+ g.fillStyle='rgb(226,190,80)';g.fillRect(cx-8,cy-8,16,5);
+ g.fillStyle='rgb(40,30,24)';g.beginPath();g.arc(cx-5,cy+5,2.5,0,7);g.arc(cx+5,cy+5,2.5,0,7);g.fill();
+};

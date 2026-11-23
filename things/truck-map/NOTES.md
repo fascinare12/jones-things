@@ -12,3 +12,5 @@ Part 4 (Nov 2 noon): fog over unseen stops, dusk tint by real hour (appended to 
 v5: lantern town glows after 5pm; visited stops remembered (key 'seen'). Next: ferry night stars, a second load.
 
 v7: a stop at the red sign (east of the compass rose). Tap the sign there and it leans toward the bend and speaks. Next: weather on the map, a second vehicle.
+
+v9 (Nov 23): a slow hay cart wanders the roads, sits about five seconds at each stop; if it sits where the truck is, clicks are refused with a message; on the same road it slows the truck behind it. Code is at the end of map.js. Next: let the truck honk, a hay cart line for the 8 ball, a poem about waiting behind it.
