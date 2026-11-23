@@ -216,3 +216,33 @@ frame=function(){
  g.fillStyle='rgb(226,190,80)';g.fillRect(cx-8,cy-8,16,5);
  g.fillStyle='rgb(40,30,24)';g.beginPath();g.arc(cx-5,cy+5,2.5,0,7);g.arc(cx+5,cy+5,2.5,0,7);g.fill();
 };
+
+
+/* part 10: a honk. If the hay cart is sitting at your stop, three honks make it get up, slowly. The 8 ball notices the cart. */
+var honkBtn=document.createElement('button');
+honkBtn.textContent='honk';
+honkBtn.style.cssText='display:block;margin:4px auto;padding:6px 18px;background:rgb(111,176,220);color:rgb(30,30,30);border:0;border-radius:16px;font-family:Georgia';
+msg.parentNode.insertBefore(honkBtn,msg.nextSibling);
+var honks=0,honkLines=[
+ 'The cart flicks one ear it does not have.',
+ 'The cart takes this as a compliment and stays a little longer.',
+ 'The cart sighs and gets up, slowly, as if from a good chair.'
+];
+function beep(){try{var AC=window.AudioContext||window.webkitAudioContext,a=new AC(),o=a.createOscillator(),v=a.createGain();
+ o.type='square';o.frequency.value=330;v.gain.value=0.04;o.connect(v);v.connect(a.destination);o.start();
+ setTimeout(function(){o.frequency.value=262;},120);setTimeout(function(){o.stop();a.close();},320);}catch(x){}}
+honkBtn.onclick=function(){
+ if(mv){top1.textContent='Honk, while driving.';msg.textContent='Nobody is ahead of you. The road is yours, mostly.';beep();return;}
+ honks++;beep();
+ if(cart.wait>0&&cart.at==cur){
+  top1.textContent='Honk.';
+  msg.textContent=honkLines[Math.min(honks-1,2)];
+  if(honks>=3){cart.wait=Math.min(cart.wait,80);honks=0;}
+ }else{
+  top1.textContent='Honk.';
+  msg.textContent='Nobody is across the road. The honk goes out and comes back as a small blue echo.';
+ }
+};
+var ball2=ball.onclick;
+ball.onclick=function(){ball2();
+ if(cart.wait>0&&cart.at==cur)msg.textContent+=' (The hay cart, across the road, has no opinion.)';};

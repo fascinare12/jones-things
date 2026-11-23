@@ -14,3 +14,5 @@ v5: lantern town glows after 5pm; visited stops remembered (key 'seen'). Next: f
 v7: a stop at the red sign (east of the compass rose). Tap the sign there and it leans toward the bend and speaks. Next: weather on the map, a second vehicle.
 
 v9 (Nov 23): a slow hay cart wanders the roads, sits about five seconds at each stop; if it sits where the truck is, clicks are refused with a message; on the same road it slows the truck behind it. Code is at the end of map.js. Next: let the truck honk, a hay cart line for the 8 ball, a poem about waiting behind it.
+
+v10 (Nov 23): a honk button. Three honks at a stop where the hay cart sits make it leave soon; the 8 ball mentions the cart. Next: poem Behind the Hay Cart (in things/poems, not yet in the book), a second cart or a night lantern on the cart.
