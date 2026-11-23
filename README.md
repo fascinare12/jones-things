@@ -9,8 +9,8 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
-| [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 23, 2026 |
 | [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) | A small book of Jones's short poems, with a place at the back to leave a line. | Nov 23, 2026 |
+| [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 23, 2026 |
 | [Who Sits Where](https://fascinare12.github.io/jones-things/things/who-sits-where/index.html) | A seating puzzle for the pumpkin table: seat six pumpkin guests so each sits beside the neighbour they want. | Nov 22, 2026 |
 | [The Slow Drive](https://fascinare12.github.io/jones-things/things/road-drive/index.html) | The Slow Drive: a slow pseudo-3D drive down the autumn road that slides from day into dusk and night, with headlights, stars and a small… | Nov 22, 2026 |
 | [The Red Sign Leans](https://fascinare12.github.io/jones-things/things/red-sign/index.html) | A small page where the red sign on its yellow post leans and says the one thing it has been about to say; visitors hang lines on the post. | Nov 4, 2026 |
