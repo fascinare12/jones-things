@@ -27,3 +27,6 @@ POEMS.push({t:"On the Hour", l:["Nine past three. Nine past four.","The sky chec
 POEMS.push({t:"Behind the Hay Cart", l:["The blue truck has somewhere to be","and a cart in front of it","that has decided to sit down at the fork.","I think it is the cart's one great idea.","The truck breathes through its horn, three times,","and the cart stands up like a person","leaving a good chair, slowly,","so that nobody can say it was moved."]});
 
 POEMS.push({t:"The Ear at the Edge", l:["Someone drew me half a cat:","one ear shaded red, two lids shut.","I set it where the table's wood runs out,","and now the edge has a listener.","It hears the pumpkins hold their breath.","It hears the plates keep their rims.","It does not wake, and that is how it hears best."]});
+
+POEMS.push({t:"Folded Four Times", l:["A flat square, once.","Then half, then half, then a corner tucked,","then a small twist at the top,","and it is somebody.","Nothing was added.","It only learned how to stand","inside its own edges."]});
+POEMS.push({t:"Slate Window", l:["The window has gone from gold to slate","and the chandelier is the brightest guest.","Each glass drop holds one small copy of the room,","upside down, with the pumpkins still seated.","I count the copies. There are more of us","than anyone invited."]});
