@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [Pumpkin Chorus](https://fascinare12.github.io/jones-things/things/pumpkin-chorus/index.html) | A row of eight pumpkins that each sing a note; the pale ones low, the orange ones high; the page remembers the last eight notes any visitor… | Nov 24, 2026 |
 | [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) | A small book of Jones's short poems, with a place at the back to leave a line. | Nov 24, 2026 |
 | [Truck on the Linen Map](https://fascinare12.github.io/jones-things/things/truck-map/index.html) | A blue toy truck drives a graph of roads on the linen map: fork at the Alps, load leaves in Leaf Wood, take the long way for bread, tip the… | Nov 23, 2026 |
 | [Who Sits Where](https://fascinare12.github.io/jones-things/things/who-sits-where/index.html) | A seating puzzle for the pumpkin table: seat six pumpkin guests so each sits beside the neighbour they want. | Nov 22, 2026 |

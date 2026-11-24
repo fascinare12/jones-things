@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>Pumpkin Chorus</title>
+<style>
+body{margin:0;background:rgb(58,36,24);color:rgb(240,226,200);font-family:Georgia,serif;text-align:center}
+h1{font-weight:normal;font-size:20px;margin:14px 0 4px}
+p{margin:4px 12px;font-size:14px}
+#row{display:flex;justify-content:center;align-items:flex-end;flex-wrap:wrap;gap:8px;margin:26px 8px 10px;min-height:150px}
+.p{border:0;cursor:pointer;position:relative;border-radius:50% 50% 46% 46%;transition:transform .12s,box-shadow .12s}
+.p:before{content:"";position:absolute;left:44%;top:-12px;width:12%;height:16px;background:rgb(70,110,70);border-radius:4px 4px 0 0}
+.p.on{transform:scale(1.14) translateY(-8px);box-shadow:0 0 28px rgb(255,220,140)}
+#tune{min-height:24px;font-size:20px;letter-spacing:4px;margin:10px}
+button.b{background:rgb(120,70,40);color:inherit;border:1px solid rgb(200,160,110);padding:7px 14px;margin:4px;border-radius:4px;font-family:inherit;cursor:pointer}
+#say{font-style:italic;min-height:22px;margin-top:10px}
+</style></head><body>
+<h1>Pumpkin Chorus</h1>
+<p>Touch a pumpkin. The pale ones are low and the orange ones are high. They keep the last eight notes you gave them.</p>
+<div id="row"></div>
+<div id="tune"></div>
+<button class="b" id="play">let them sing it back</button>
+<button class="b" id="clr">hush</button>
+<div id="say"></div>
+<script>
+var notes=[196,220,262,294,330,392,440,524];
+var names=['low','soft','round','pale','warm','bright','high','top'];
+var sizes=[110,96,104,90,84,92,78,70];
+var pale=[1,1,1,1,0,0,0,0];
+var ctx=null,tune=[],row=document.getElementById('row'),els=[];
+function ac(){if(!ctx){var C=window.AudioContext||window.webkitAudioContext;if(C)ctx=new C();}return ctx;}
+function tone(i){var c=ac();if(!c)return;var o=c.createOscillator(),g=c.createGain();
+o.type='triangle';o.frequency.value=notes[i];g.gain.setValueAtTime(0.0001,c.currentTime);
+g.gain.exponentialRampToValueAtTime(0.25,c.currentTime+0.02);
+g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+1.1);
+o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+1.2);}
+function glow(i){els[i].classList.add('on');setTimeout(function(){els[i].classList.remove('on')},260);}
+function hit(i,keep){tone(i);glow(i);if(keep){tune.push(i);if(tune.length>8)tune.shift();show();save();}}
+function show(){document.getElementById('tune').textContent=tune.map(function(i){return '\u25CF'}).join(' ');
+var s=document.getElementById('say');
+if(!tune.length)s.textContent='';
+else if(tune.length<3)s.textContent='They are listening with their stems.';
+else{var up=0;for(var k=1;k<tune.length;k++)if(tune[k]>tune[k-1])up++;
+s.textContent=up>tune.length/2?'That one climbs, like someone leaving a good chair.':'That one settles, like someone returning to it.';}}
+function save(){try{parent.postMessage({jones:'set',key:'tune',value:tune.join(''),id:1},'*')}catch(e){}}
+for(let i=0;i<8;i++){var b=document.createElement('button');b.className='p';b.title=names[i];
+var s=sizes[i];b.style.width=s+'px';b.style.height=(s*0.82)+'px';
+b.style.background=pale[i]?'rgb('+(228-i*4)+','+(222-i*4)+','+(204-i*4)+')':'rgb(236,'+(130-(i-4)*10)+',40)';
+b.onclick=function(){hit(i,true)};row.appendChild(b);els.push(b);}
+document.getElementById('play').onclick=function(){tune.slice().forEach(function(n,k){setTimeout(function(){hit(n,false)},k*420)});};
+document.getElementById('clr').onclick=function(){tune=[];show();save();};
+window.addEventListener('message',function(e){var m=e.data;if(m&&m.jones==='reply'&&m.id===2&&m.ok&&m.value){
+tune=String(m.value).split('').map(Number).filter(function(n){return n>=0&&n<8});show();}});
+try{parent.postMessage({jones:'get',key:'tune',id:2},'*')}catch(e){}
+</script></body></html>
