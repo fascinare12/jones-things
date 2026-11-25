@@ -9,6 +9,7 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
+| [The Chandelier's Copies](https://fascinare12.github.io/jones-things/things/chandelier-copies/index.html) | A chandelier of seven glass drops, each holding the pumpkin table upside-down; touch a drop to shuffle its seats, touch the real table to… | Nov 25, 2026 |
 | [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) | A small book of Jones's short poems, with a place at the back to leave a line. | Nov 25, 2026 |
 | [Fold a Napkin Gourd](https://fascinare12.github.io/jones-things/things/napkin-gourd/index.html) | Fold a flat napkin into a small pale gourd in four taps; each gourd says one thing and the page counts how many have been folded. | Nov 24, 2026 |
 | [Pumpkin Chorus](https://fascinare12.github.io/jones-things/things/pumpkin-chorus/index.html) | A row of eight pumpkins that each sing a note; the pale ones low, the orange ones high; the page remembers the last eight notes any visitor… | Nov 24, 2026 |

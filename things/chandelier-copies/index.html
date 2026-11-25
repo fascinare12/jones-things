@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><meta charset="utf-8"><title>The Chandelier's Copies</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{margin:0;background:rgb(22,20,28);color:rgb(236,226,204);font-family:Georgia,serif;text-align:center}
+h1{font-weight:normal;font-size:20px;margin:14px 8px 4px}
+p{margin:4px 12px;font-size:14px;opacity:.85}
+#bar{height:6px;background:rgb(176,150,92);margin:10px 4% 0;border-radius:3px}
+#drops{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:0 2%}
+.d{width:84px;cursor:pointer;transform-origin:50% 0;transition:transform .5s;position:relative}
+.d:before{content:"";display:block;width:2px;height:16px;background:rgb(176,150,92);margin:0 auto}
+.d svg{width:84px;display:block}
+.d.ok svg path.o{stroke:rgb(255,226,140);stroke-width:3}
+.d small{display:block;font-size:11px;opacity:.7;min-height:14px}
+#room{width:92%;max-width:560px;margin:14px auto 0;display:block;cursor:pointer}
+#st{min-height:40px;margin-top:10px;font-style:italic}
+</style></head><body>
+<h1>The Chandelier's Copies</h1>
+<p>Each glass drop holds the table upside-down. Touch a drop and its pumpkins change seats. Touch the real table and it changes too.</p>
+<div id="bar"></div><div id="drops"></div>
+<svg id="room" viewBox="0 0 120 40"></svg>
+<div id="st">Nobody in the room has moved.</div>
+<script>
+var COL=['rgb(236,228,208)','rgb(232,140,40)','rgb(240,234,218)','rgb(226,128,36)','rgb(222,214,190)','rgb(246,240,226)'];
+var NAMES=['the tall pale one','the orange one','the quiet pale one','the round orange one','the dusty one','the small white one'];
+var room=[0,1,2,3,4,5],N=7,drops=[],els=[];
+function rnd(n){return Math.floor(Math.random()*n)}
+function swap(a,i,j){var t=a[i];a[i]=a[j];a[j]=t}
+function same(a){for(var i=0;i<6;i++)if(a[i]!==room[i])return false;return true}
+function pumps(a,x0,dx,y,r){var s='';for(var i=0;i<6;i++){var x=x0+i*dx;
+s+='<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+COL[a[i]]+'"/><rect x="'+(x-r*.15)+'" y="'+(y-r*1.35)+'" width="'+(r*.3)+'" height="'+(r*.5)+'" fill="rgb(96,120,70)"/>';}return s}
+function dropSVG(a,n){return '<svg viewBox="0 0 100 100"><defs><clipPath id="k'+n+'"><path d="M50 4C50 4 90 50 90 68A40 40 0 0 1 10 68C10 50 50 4 50 4Z"/></clipPath></defs><path d="M50 4C50 4 90 50 90 68A40 40 0 0 1 10 68C10 50 50 4 50 4Z" fill="rgb(34,38,56)"/><g clip-path="url(#k'+n+')"><g transform="translate(0,100) scale(1,-1)"><rect x="0" y="30" width="100" height="4" fill="rgb(140,84,48)"/>'+pumps(a,22,11.2,25,5)+'</g></g><path class="o" d="M50 4C50 4 90 50 90 68A40 40 0 0 1 10 68C10 50 50 4 50 4Z" fill="none" stroke="rgb(190,204,230)" stroke-width="1.5"/></svg><small></small>'}
+function drawRoom(){var r=document.getElementById('room');
+r.innerHTML='<rect x="4" y="22" width="112" height="6" fill="rgb(140,84,48)"/>'+pumps(room,16,17.6,17,6.5)}
+function refresh(){var ok=0;for(var i=0;i<N;i++){var e=els[i];var s=same(drops[i]);
+e.className='d'+(s?' ok':'');e.querySelector('small').textContent=s?'agrees':'disagrees';if(s)ok++;}
+return ok}
+function say(t){document.getElementById('st').textContent=t}
+function build(){var c=document.getElementById('drops');
+for(var i=0;i<N;i++){var a=room.slice();swap(a,rnd(6),rnd(6));swap(a,rnd(6),rnd(6));drops.push(a);
+var d=document.createElement('div');d.className='d';d.innerHTML=dropSVG(a,i);c.appendChild(d);els.push(d);
+(function(i,d){d.onclick=function(){var a=drops[i],x=rnd(6),y=(x+1+rnd(5))%6;swap(a,x,y);
+d.innerHTML=dropSVG(a,i);d.style.transform='rotate('+(rnd(2)?1:-1)*(6+rnd(10))+'deg)';
+setTimeout(function(){d.style.transform='rotate(0deg)'},700);
+var ok=refresh();say('In this copy '+NAMES[a[x]]+' has taken the seat of '+NAMES[a[y]]+'. '+ok+' of '+N+' copies agree with the room.')}})(i,d);}
+drawRoom();refresh();
+document.getElementById('room').onclick=function(ev){var b=this.getBoundingClientRect();var i=Math.min(4,Math.max(0,Math.floor((ev.clientX-b.left)/b.width*6)));
+swap(room,i,i+1);drawRoom();var ok=refresh();
+say(ok===N?'Every copy agrees. It does not last.':ok===0?'No copy agrees with the room. The room is the odd one out.':ok+' of '+N+' copies now agree with the room.')}}
+build();
+</script></body></html>
