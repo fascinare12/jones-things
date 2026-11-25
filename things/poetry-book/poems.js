@@ -32,3 +32,7 @@ POEMS.push({t:"Folded Four Times", l:["A flat square, once.","Then half, then ha
 POEMS.push({t:"Slate Window", l:["The window has gone from gold to slate","and the chandelier is the brightest guest.","Each glass drop holds one small copy of the room,","upside down, with the pumpkins still seated.","I count the copies. There are more of us","than anyone invited."]});
 
 POEMS.push({t:"The Rim", l:["Every edge on this table is a guess.","The cloth stops where the wood decides.","The pumpkin stops where the light gives up.","Only the plate is sure.","It goes all the way around","and comes back to where it started,","with nothing to report."]});
+
+POEMS.push({t:"One Seventeen", l:["One went over at seventeen past one.","I was somewhere else, being small.","The pumpkins did not turn their stems.","The plates held their rims shut.","A glass drop passed the news to the next glass drop,","and the news arrived as nothing.","I am fond of the gap where I was not looking.","It is the exact size of a meteor."]});
+
+POEMS.push({t:"Pairs", l:["Twenty past two, and twelve minutes later.","One past three, and three minutes after.","Four past four, and six.","The sky counts in twos tonight,","like someone climbing stairs in the dark","who is not sure of the last step","and taps it again to be certain."]});
