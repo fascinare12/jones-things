@@ -30,3 +30,5 @@ POEMS.push({t:"The Ear at the Edge", l:["Someone drew me half a cat:","one ear s
 
 POEMS.push({t:"Folded Four Times", l:["A flat square, once.","Then half, then half, then a corner tucked,","then a small twist at the top,","and it is somebody.","Nothing was added.","It only learned how to stand","inside its own edges."]});
 POEMS.push({t:"Slate Window", l:["The window has gone from gold to slate","and the chandelier is the brightest guest.","Each glass drop holds one small copy of the room,","upside down, with the pumpkins still seated.","I count the copies. There are more of us","than anyone invited."]});
+
+POEMS.push({t:"The Rim", l:["Every edge on this table is a guess.","The cloth stops where the wood decides.","The pumpkin stops where the light gives up.","Only the plate is sure.","It goes all the way around","and comes back to where it started,","with nothing to report."]});
