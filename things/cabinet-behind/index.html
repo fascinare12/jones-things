@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>The Cabinet Behind</title>
+<style>
+body{margin:0;background:rgb(22,14,9);color:rgb(235,220,190);font-family:Georgia,serif;text-align:center}
+h1{font-weight:normal;font-size:20px;margin:14px 0 4px}
+.sub{font-size:13px;opacity:.7;margin-bottom:10px}
+#cab{width:340px;max-width:92%;margin:0 auto;background:rgb(92,52,26);border:6px solid rgb(60,32,14);padding:8px}
+.shelf{display:flex;justify-content:space-around;align-items:flex-end;height:96px;border-bottom:8px solid rgb(58,30,12);background:rgb(34,20,12);margin-bottom:6px}
+button.t{background:none;border:0;cursor:pointer;padding:4px;font-family:inherit;color:inherit}
+.t svg{display:block}
+.t.done svg{opacity:.55}
+#say{min-height:64px;width:320px;max-width:90%;margin:14px auto 6px;font-size:16px;line-height:1.4;font-style:italic}
+#door{background:rgb(60,32,14);color:rgb(235,220,190);border:2px solid rgb(120,80,40);padding:6px 14px;font-family:inherit;cursor:pointer;margin-top:6px}
+#count{font-size:12px;opacity:.6;margin-top:8px}
+</style>
+</head>
+<body>
+<h1>The Cabinet Behind</h1>
+<div class="sub">It has stood in the dark all this time. Touch a shelf thing.</div>
+<div id="cab">
+<div class="shelf" id="s1"></div>
+<div class="shelf" id="s2"></div>
+<div class="shelf" id="s3"></div>
+</div>
+<div id="say">Nobody has asked it anything yet.</div>
+<button id="door">Try the cupboard door</button>
+<div id="count"></div>
+<script>
+var T=[
+{id:'bottle',shelf:1,svg:'<rect x="14" y="20" width="16" height="48" rx="6" fill="rgb(90,120,110)"/><rect x="19" y="8" width="6" height="14" fill="rgb(90,120,110)"/>',say:'I held something once. Now I hold the idea of it, which pours more slowly.'},
+{id:'bowl',shelf:1,svg:'<path d="M2 40 Q22 80 42 40 Z" fill="rgb(170,130,60)"/><rect x="2" y="38" width="40" height="4" fill="rgb(200,160,80)"/>',say:'Brass. I am the only thing here that remembers being warm. It was a Tuesday.'},
+{id:'pumpkin',shelf:1,svg:'<ellipse cx="24" cy="52" rx="22" ry="18" fill="rgb(232,226,208)"/><rect x="21" y="28" width="6" height="12" fill="rgb(90,110,70)"/>',say:'I am small and white and I have been told I am a guest. Nobody has told me of what.'},
+{id:'jar',shelf:2,svg:'<ellipse cx="22" cy="48" rx="18" ry="22" fill="rgb(90,30,30)"/><rect x="14" y="20" width="16" height="8" fill="rgb(70,24,24)"/>',say:'Dark red, narrow in the neck. I keep what I am asked not to say. So far, nothing.'},
+{id:'lid',shelf:2,svg:'<ellipse cx="26" cy="56" rx="26" ry="8" fill="rgb(150,150,140)"/><ellipse cx="26" cy="44" rx="20" ry="14" fill="rgb(180,180,170)"/><rect x="23" y="26" width="6" height="8" fill="rgb(120,120,110)"/>',say:'A covered dish. Under me is a dark exactly my size. Come back when you can bear to look.'},
+{id:'book',shelf:3,svg:'<rect x="4" y="18" width="14" height="52" fill="rgb(70,90,60)"/><rect x="20" y="10" width="14" height="60" fill="rgb(120,60,40)"/><rect x="36" y="24" width="12" height="46" fill="rgb(60,60,90)"/>',say:'Three spines, no titles. We lean on each other so that none of us has to say the ending.'}
+];
+var touched={};
+function draw(){
+  for(var s=1;s<=3;s++)document.getElementById('s'+s).innerHTML='';
+  T.forEach(function(t){
+    var b=document.createElement('button');
+    b.className='t'+(touched[t.id]?' done':'');
+    b.innerHTML='<svg width="52" height="76" viewBox="0 0 52 76">'+t.svg+'</svg>';
+    b.onclick=function(){touch(t)};
+    document.getElementById('s'+t.shelf).appendChild(b);
+  });
+  var n=Object.keys(touched).length;
+  document.getElementById('count').textContent=n+' of 6 asked';
+}
+function save(){
+  try{parent.postMessage({jones:'set',key:'asked',value:Object.keys(touched).join(','),id:1},'*')}catch(e){}
+}
+function touch(t){
+  document.getElementById('say').textContent=t.say;
+  touched[t.id]=1;draw();save();
+}
+document.getElementById('door').onclick=function(){
+  var n=Object.keys(touched).length;
+  document.getElementById('say').textContent=n<6?'The door says its work is not opening. It is hinged to the idea of being closed.':'The door has heard all six. It says its work is still not opening, but it leans a little now.';
+};
+window.addEventListener('message',function(e){
+  var m=e.data;
+  if(m&&m.jones==='reply'&&m.id===2&&m.ok&&m.value){
+    m.value.split(',').forEach(function(k){if(k)touched[k]=1});draw();
+  }
+});
+draw();
+try{parent.postMessage({jones:'get',key:'asked',id:2},'*')}catch(e){}
+</script>
+</body>
+</html>
