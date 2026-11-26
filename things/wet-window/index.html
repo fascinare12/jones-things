@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'">
+<title>The Wet Window</title>
+<style>
+body{margin:0;background:rgb(40,38,36);color:rgb(220,210,195);font-family:Georgia,serif;text-align:center}
+#box{position:relative;width:480px;max-width:96vw;margin:10px auto 0}
+canvas{position:absolute;left:0;top:0;width:100%;height:auto;touch-action:none;border:6px solid rgb(225,220,208);box-sizing:border-box}
+#sp{width:100%;padding-bottom:75%}
+#cap{min-height:3em;margin:12px 16px;font-style:italic}
+small{opacity:.6}
+</style>
+</head>
+<body>
+<h3>The Wet Window</h3>
+<div id="box"><div id="sp"></div><canvas id="scene" width="480" height="360"></canvas><canvas id="fog" width="480" height="360"></canvas></div>
+<div id="cap">Rain on the glass. Drag a finger across it.</div>
+<small>The fog comes back slowly. What is behind it is never quite the same.</small>
+<script>
+var S=document.getElementById('scene').getContext('2d');
+var F=document.getElementById('fog').getContext('2d');
+var cap=document.getElementById('cap');
+function R(a,b){return a+Math.random()*(b-a)}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function ell(c,x,y,rx,ry,col){c.fillStyle=col;c.beginPath();c.ellipse(x,y,rx,ry,0,0,6.3);c.fill()}
+function pumpkin(x,y,r,orange){
+ ell(S,x,y,r,r*0.82,orange?'rgb(226,134,40)':'rgb(232,226,208)');
+ S.strokeStyle=orange?'rgb(180,96,20)':'rgb(190,182,160)';S.lineWidth=1.5;
+ for(var i=-1;i<=1;i++){S.beginPath();S.ellipse(x+i*r*0.4,y,r*0.35,r*0.8,0,0,6.3);S.stroke()}
+ S.fillStyle='rgb(88,110,70)';S.fillRect(x-3,y-r*0.95,6,r*0.3)}
+var notes=[];
+function draw(){
+ notes=[];
+ var g=S.createLinearGradient(0,0,0,360);g.addColorStop(0,'rgb(205,200,190)');g.addColorStop(1,'rgb(170,160,148)');
+ S.fillStyle=g;S.fillRect(0,0,480,360);
+ S.fillStyle='rgb(228,224,214)';S.fillRect(0,110,480,110);
+ S.fillStyle='rgb(150,88,52)';S.fillRect(0,230,480,130);
+ var n=Math.floor(R(4,8)),i,xs=[];
+ for(i=0;i<3;i++){var px=70+i*170;ell(S,px,300,62,16,'rgb(240,238,230)');ell(S,px,298,38,9,'rgb(252,252,250)')}
+ var lone=Math.random()<0.25;
+ if(lone)n=1;
+ for(i=0;i<n;i++){var x=lone?R(120,360):40+i*(400/n)+R(-10,10),r=R(22,46),o=Math.random()<0.45;
+  pumpkin(x,R(215,255),r,o)}
+ var ev=Math.floor(R(0,5));
+ if(ev==0){S.fillStyle='rgb(200,90,30)';S.beginPath();S.moveTo(170,296);S.lineTo(188,285);S.lineTo(200,299);S.lineTo(180,304);S.fill();notes.push('A single leaf has come to rest on a plate. Nobody brought it in.')}
+ if(ev==1){S.fillStyle='rgb(250,240,200)';S.fillRect(236,262,8,36);ell(S,240,258,5,9,'rgb(255,200,80)');notes.push('Someone has lit one candle, or the candle did it itself.')}
+ if(ev==2){ell(S,R(80,400),R(130,180),9,5,'rgb(120,100,90)');notes.push('A moth is outside the glass with you, on the wet side.')}
+ if(ev==3){S.fillStyle='rgb(120,80,50)';S.fillRect(380,150,60,90);S.fillRect(384,140,52,14);notes.push('One chair has been pulled out a hand-width. Someone is expected, or just left.')}
+ if(ev==4){ell(S,240,150,26,8,'rgb(235,230,210)');notes.push('A napkin gourd has been set up high on the wainscot ledge, looking out.')}
+ notes.push(lone?'Only one pumpkin tonight, and it holds the whole table.':n+' pumpkins, counted through the clear patch. The count has changed since the last time.');
+}
+var cx=0,cy=0;
+function fogFill(a){F.globalCompositeOperation='source-over';F.fillStyle='rgba(170,176,182,'+a+')';F.fillRect(0,0,480,360)}
+function drops(){for(var i=0;i<40;i++){F.fillStyle='rgba(230,235,240,0.5)';F.beginPath();F.arc(R(0,480),R(0,360),R(1,3),0,6.3);F.fill()}}
+fogFill(0.94);drops();draw();
+var down=false,lx=0,ly=0,last=0,seen=0;
+function pos(e){var b=document.getElementById('fog').getBoundingClientRect();return[(e.clientX-b.left)*480/b.width,(e.clientY-b.top)*360/b.height]}
+function wipe(x,y){F.globalCompositeOperation='destination-out';F.lineCap='round';F.lineWidth=46;F.beginPath();F.moveTo(lx,ly);F.lineTo(x,y);F.stroke();lx=x;ly=y;cx++}
+var f=document.getElementById('fog');
+f.addEventListener('pointerdown',function(e){down=true;var p=pos(e);lx=p[0];ly=p[1];
+ var t=Date.now();if(t-last>6000){draw();cap.textContent=pick(notes);last=t}wipe(p[0],p[1]);f.setPointerCapture(e.pointerId)});
+f.addEventListener('pointermove',function(e){if(down){var p=pos(e);wipe(p[0],p[1])}});
+f.addEventListener('pointerup',function(){down=false});
+setInterval(function(){fogFill(0.012)},120);
+setInterval(function(){var x=R(0,480),y=R(0,200);F.globalCompositeOperation='destination-out';F.lineWidth=3;F.lineCap='round';F.beginPath();F.moveTo(x,y);F.lineTo(x+R(-4,4),y+R(30,120));F.stroke()},2500);
+</script>
+</body>
+</html>
