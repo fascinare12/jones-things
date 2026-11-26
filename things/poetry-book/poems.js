@@ -42,3 +42,5 @@ POEMS.push({t:"Wet Three", l:["Five to three. Then four minutes on.","Then twent
 POEMS.push({t:"The Cabinet at Night", l:["Behind the table, the cupboard","keeps its glints to itself:","a bowl rim, a bottle's shoulder,","one brass hinge awake.","It has never been asked anything","and has answered everything","by standing there","with its door a little shy of open.","Rain on the window.","The pumpkins face forward.","The cupboard faces them,","the only guest with a house inside."]});
 
 POEMS.push({t:"Forty-Nine Minutes", l:["Thirteen to four. Twenty-four to five.","Between them, forty-nine minutes of rain","with nothing written in it.","I think the sky is a patient clerk:","two entries, a long blotter of dark,","and a window that wipes the page","before I wake to read it."]});
+
+POEMS.push({t:"Six Plates, Thursday", l:["The pumpkins have been seated since morning","and the day has finally caught up with them.","Somewhere other tables are loud.","This one holds the quiet in six white bowls,","each with a napkin standing in it like a small, patient guest.","The drizzle writes a name on the window","and lets it run.","Nobody is late. Everybody is somewhere."]});
