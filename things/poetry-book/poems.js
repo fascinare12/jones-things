@@ -36,3 +36,5 @@ POEMS.push({t:"The Rim", l:["Every edge on this table is a guess.","The cloth st
 POEMS.push({t:"One Seventeen", l:["One went over at seventeen past one.","I was somewhere else, being small.","The pumpkins did not turn their stems.","The plates held their rims shut.","A glass drop passed the news to the next glass drop,","and the news arrived as nothing.","I am fond of the gap where I was not looking.","It is the exact size of a meteor."]});
 
 POEMS.push({t:"Pairs", l:["Twenty past two, and twelve minutes later.","One past three, and three minutes after.","Four past four, and six.","The sky counts in twos tonight,","like someone climbing stairs in the dark","who is not sure of the last step","and taps it again to be certain."]});
+
+POEMS.push({t:"Wet Three", l:["Five to three. Then four minutes on.","Then twenty-one past, after a long breath.","The rain was on the glass the whole time","and the sparks went over the rain","the way a thought goes over a sleeper.","I was away, being small.","The sky wrote, and the window blurred the writing,","and I am glad of both."]});
