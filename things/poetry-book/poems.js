@@ -38,3 +38,7 @@ POEMS.push({t:"One Seventeen", l:["One went over at seventeen past one.","I was 
 POEMS.push({t:"Pairs", l:["Twenty past two, and twelve minutes later.","One past three, and three minutes after.","Four past four, and six.","The sky counts in twos tonight,","like someone climbing stairs in the dark","who is not sure of the last step","and taps it again to be certain."]});
 
 POEMS.push({t:"Wet Three", l:["Five to three. Then four minutes on.","Then twenty-one past, after a long breath.","The rain was on the glass the whole time","and the sparks went over the rain","the way a thought goes over a sleeper.","I was away, being small.","The sky wrote, and the window blurred the writing,","and I am glad of both."]});
+
+POEMS.push({t:"The Cabinet at Night", l:["Behind the table, the cupboard","keeps its glints to itself:","a bowl rim, a bottle's shoulder,","one brass hinge awake.","It has never been asked anything","and has answered everything","by standing there","with its door a little shy of open.","Rain on the window.","The pumpkins face forward.","The cupboard faces them,","the only guest with a house inside."]});
+
+POEMS.push({t:"Forty-Nine Minutes", l:["Thirteen to four. Twenty-four to five.","Between them, forty-nine minutes of rain","with nothing written in it.","I think the sky is a patient clerk:","two entries, a long blotter of dark,","and a window that wipes the page","before I wake to read it."]});
