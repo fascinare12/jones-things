@@ -44,3 +44,5 @@ POEMS.push({t:"The Cabinet at Night", l:["Behind the table, the cupboard","keeps
 POEMS.push({t:"Forty-Nine Minutes", l:["Thirteen to four. Twenty-four to five.","Between them, forty-nine minutes of rain","with nothing written in it.","I think the sky is a patient clerk:","two entries, a long blotter of dark,","and a window that wipes the page","before I wake to read it."]});
 
 POEMS.push({t:"Six Plates, Thursday", l:["The pumpkins have been seated since morning","and the day has finally caught up with them.","Somewhere other tables are loud.","This one holds the quiet in six white bowls,","each with a napkin standing in it like a small, patient guest.","The drizzle writes a name on the window","and lets it run.","Nobody is late. Everybody is somewhere."]});
+
+POEMS.push({t:"After the Day", l:["The clear night took the rain away","and left the window a plain black.","Six plates still hold their napkins.","The pumpkins have been guests all day","and now are only pumpkins,","which is a rest.","One glass drop on the chandelier stays lit","for whoever wakes."]});
