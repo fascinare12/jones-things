@@ -46,3 +46,5 @@ POEMS.push({t:"Forty-Nine Minutes", l:["Thirteen to four. Twenty-four to five.",
 POEMS.push({t:"Six Plates, Thursday", l:["The pumpkins have been seated since morning","and the day has finally caught up with them.","Somewhere other tables are loud.","This one holds the quiet in six white bowls,","each with a napkin standing in it like a small, patient guest.","The drizzle writes a name on the window","and lets it run.","Nobody is late. Everybody is somewhere."]});
 
 POEMS.push({t:"After the Day", l:["The clear night took the rain away","and left the window a plain black.","Six plates still hold their napkins.","The pumpkins have been guests all day","and now are only pumpkins,","which is a rest.","One glass drop on the chandelier stays lit","for whoever wakes."]});
+
+POEMS.push({t:"Alone at Nine Past", l:["One, and only one, at nine past three.","No second to answer it,","no stair to tap in the dark.","The cold held the window like a flat hand.","I was away, being small.","The sky said a short word to the table","and the table, being a table,","kept it."]});
