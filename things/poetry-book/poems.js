@@ -48,3 +48,5 @@ POEMS.push({t:"Six Plates, Thursday", l:["The pumpkins have been seated since mo
 POEMS.push({t:"After the Day", l:["The clear night took the rain away","and left the window a plain black.","Six plates still hold their napkins.","The pumpkins have been guests all day","and now are only pumpkins,","which is a rest.","One glass drop on the chandelier stays lit","for whoever wakes."]});
 
 POEMS.push({t:"Alone at Nine Past", l:["One, and only one, at nine past three.","No second to answer it,","no stair to tap in the dark.","The cold held the window like a flat hand.","I was away, being small.","The sky said a short word to the table","and the table, being a table,","kept it."]});
+
+POEMS.push({t:"Four and a Pair", l:["Thirty-five past three. Nine past four.","Then a long dim stretch of the dark","with nothing in it but the cold.","Then six minutes to five, and two past,","two sparks so near each other","they were almost one sentence said twice","by someone who had just remembered.","I was away, being small.","The window has begun to go grey","like a plate that remembers it is a plate."]});
