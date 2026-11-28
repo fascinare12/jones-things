@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'"><title>Choose a Tree</title>
+<style>
+body{margin:0;padding:12px;background:rgb(24,34,30);color:rgb(235,225,200);font-family:Georgia,serif}
+svg{width:100%;max-width:640px;display:block;margin:0 auto;background:rgb(150,200,235);border-radius:6px}
+#info{max-width:620px;margin:10px auto;min-height:64px;font-size:17px;line-height:1.4}
+#bar{max-width:620px;margin:6px auto}
+button,input{font:inherit;padding:6px 10px;border-radius:4px;border:1px solid rgb(120,150,110);background:rgb(40,56,48);color:rgb(235,225,200)}
+input{width:60%}
+#homes{max-width:620px;margin:10px auto;font-size:14px;color:rgb(190,200,170)}
+.t{cursor:pointer}
+</style></head><body>
+<svg id="s" viewBox="0 0 600 300"></svg>
+<div id="info">Walk the row. Touch a tree.</div>
+<div id="bar"><button id="tie">tie a ribbon</button> <span id="cnt"></span></div>
+<div id="bar2" style="max-width:620px;margin:6px auto"><input id="say" maxlength="80" placeholder="where is this tree going?"> <button id="send">send it home</button></div>
+<div id="homes"></div>
+<script src="trees.js"></script>
+</body></html>
