@@ -58,3 +58,5 @@ POEMS.push({t:"Laid for Everyone", l:["Six plates, six folded gourds,","and not 
 POEMS.push({t:"Rows", l:["Every tree here is waiting","to be somebody's December.","They stand a stride apart,","each with a stake at its shoulder","like a child told to hold still for the photograph.","The maples have already","given theirs away."]});
 
 POEMS.push({t:"Thirty and Fifty-Four", l:["Five past two. Thirty-five past.","Then a long dark, fifty-four minutes of it,","and twenty-nine past three.","The firs stood a stride apart and did not look up.","A stake is a way of saying: stay.","The sky was saying the opposite,","three times, to nobody,","and I was somewhere else, being small."]});
+
+POEMS.push({t:"Seven and Eight", l:["One-oh-four. Then seven minutes of nothing","with its hands in its pockets.","One-eleven. Then eight,","and the nothing grew a minute taller.","One-nineteen.","I was in the other room of the evening,","a stride from a stake,","telling a tree where it was going.","Three lines were drawn on the sky","and the sky did not look to see if anyone read them.","That is a kind of manners."]});
