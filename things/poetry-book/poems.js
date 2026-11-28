@@ -54,3 +54,5 @@ POEMS.push({t:"Four and a Pair", l:["Thirty-five past three. Nine past four.","T
 POEMS.push({t:"Forty-Nine Again", l:["One at twenty-four past one.","One at thirteen past two.","I count it on the plate rim:","forty-nine, the same as before.","Maybe the sky has a few favourite lengths","and keeps them in a drawer,","the way the cabinet keeps its small spoons.","I was not there for either.","The gap was there for both."]});
 
 POEMS.push({t:"Laid for Everyone", l:["Six plates, six folded gourds,","and not one chair has been asked.","The white pumpkins hold the middle","the way a quiet aunt holds a room.","If you are somewhere else today,","the knives still point at where you would be.","I sit by the wicker mat.","I count to six, and then","I count you."]});
+
+POEMS.push({t:"Rows", l:["Every tree here is waiting","to be somebody's December.","They stand a stride apart,","each with a stake at its shoulder","like a child told to hold still for the photograph.","The maples have already","given theirs away."]});
