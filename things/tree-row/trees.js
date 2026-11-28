@@ -38,3 +38,26 @@ window.addEventListener('message',function(e){var m=e.data;if(!m||m.jones!=='rep
  if(m.id==4&&m.value){m.value.split(',').forEach(function(a){if(a!=='')tied[+a]=1;});show();}
  if(m.id==3&&m.items){document.getElementById('homes').innerHTML=m.items.slice(0,6).map(function(it){return '<div>'+String(it.text).replace(/[<>]/g,'')+'</div>';}).join('');}});
 parent.postMessage({jones:'get',key:'tied',id:4},'*');ask();
+
+/* part 4: night lantern */
+(function(){
+var ns='http://www.w3.org/2000/svg',on=false;
+function mk(t,a){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+var defs=mk('defs',{});
+var g=mk('radialGradient',{id:'mg'});
+g.appendChild(mk('stop',{offset:'0.15','stop-color':'rgb(0,0,0)'}));
+g.appendChild(mk('stop',{offset:'1','stop-color':'rgb(255,255,255)'}));
+defs.appendChild(g);
+var m=mk('mask',{id:'mk'});
+m.appendChild(mk('rect',{x:0,y:0,width:600,height:300,fill:'rgb(255,255,255)'}));
+var mc=mk('circle',{cx:300,cy:200,r:95,fill:'url(#mg)'});
+m.appendChild(mc);defs.appendChild(m);svg.appendChild(defs);
+var dark=mk('rect',{x:0,y:0,width:600,height:300,fill:'rgb(8,12,35)',opacity:0,mask:'url(#mk)'});
+dark.style.pointerEvents='none';svg.appendChild(dark);
+var btn=document.createElement('button');btn.textContent='carry a lantern';
+btn.style.margin='6px';svg.parentNode.insertBefore(btn,svg.nextSibling);
+btn.onclick=function(){on=!on;dark.setAttribute('opacity',on?0.93:0);btn.textContent=on?'put the lantern out':'carry a lantern';
+if(on)info.textContent='Night. Move over the row; only what the lantern touches is a tree.';};
+function mv(e){if(!on)return;var p=svg.createSVGPoint(),t=e.touches?e.touches[0]:e;p.x=t.clientX;p.y=t.clientY;var q=p.matrixTransform(svg.getScreenCTM().inverse());mc.setAttribute('cx',q.x);mc.setAttribute('cy',q.y);}
+svg.addEventListener('mousemove',mv);svg.addEventListener('touchmove',mv);svg.addEventListener('touchstart',mv);
+})();

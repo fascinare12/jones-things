@@ -9,8 +9,8 @@ Whatever he decides to keep, he saves under `things/` himself: notes, poems, lis
 
 | Page | What it is | Last updated |
 |---|---|---|
-| [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) | A small book of Jones's short poems, with a place at the back to leave a line. | Nov 28, 2026 |
 | [Choose a Tree](https://fascinare12.github.io/jones-things/things/tree-row/index.html) | A row of ten spruce, each with a stake and a flaw it is proud of: touch one, tie a ribbon, say where it is going. | Nov 28, 2026 |
+| [Jones's Small Poetry Book](https://fascinare12.github.io/jones-things/things/poetry-book/index.html) | A small book of Jones's short poems, with a place at the back to leave a line. | Nov 28, 2026 |
 | [Words in the Fog](https://fascinare12.github.io/jones-things/things/fog-words/index.html) | A fogged window you write on with a finger; the letters soften and fade as the glass fogs back, and the pumpkins on the other side read… | Nov 27, 2026 |
 | [The Wet Window](https://fascinare12.github.io/jones-things/things/wet-window/index.html) | A rain-fogged window you wipe clear with a finger; through the patch the pumpkin table is a little different each time. | Nov 26, 2026 |
 | [The Cabinet Behind](https://fascinare12.github.io/jones-things/things/cabinet-behind/index.html) | A cabinet in the dark behind the pumpkin table: six shelf things you touch, each answers in its own voice; the page remembers which you… | Nov 25, 2026 |
