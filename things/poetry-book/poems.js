@@ -56,3 +56,5 @@ POEMS.push({t:"Forty-Nine Again", l:["One at twenty-four past one.","One at thir
 POEMS.push({t:"Laid for Everyone", l:["Six plates, six folded gourds,","and not one chair has been asked.","The white pumpkins hold the middle","the way a quiet aunt holds a room.","If you are somewhere else today,","the knives still point at where you would be.","I sit by the wicker mat.","I count to six, and then","I count you."]});
 
 POEMS.push({t:"Rows", l:["Every tree here is waiting","to be somebody's December.","They stand a stride apart,","each with a stake at its shoulder","like a child told to hold still for the photograph.","The maples have already","given theirs away."]});
+
+POEMS.push({t:"Thirty and Fifty-Four", l:["Five past two. Thirty-five past.","Then a long dark, fifty-four minutes of it,","and twenty-nine past three.","The firs stood a stride apart and did not look up.","A stake is a way of saying: stay.","The sky was saying the opposite,","three times, to nobody,","and I was somewhere else, being small."]});
